@@ -133,9 +133,13 @@
         <!-- Main Terminal Area -->
         <main class="lg:col-span-9 flex flex-col justify-between bg-[var(--loom-code)]">
           <!-- Terminal Tabs -->
-          <div class="flex items-center border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/30 text-xs font-mono overflow-x-auto">
+          <div role="tablist" aria-label="ActiveLoom Protocol Workflows" class="flex items-center border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/30 text-xs font-mono overflow-x-auto">
             <button
               type="button"
+              role="tab"
+              id="tab-critique"
+              aria-selected="true"
+              aria-controls="pane-critique"
               data-mock-tab="critique"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-[var(--loom-accent)] bg-[var(--loom-code)] text-[var(--loom-text)] font-semibold flex items-center gap-2 whitespace-nowrap"
             >
@@ -144,6 +148,10 @@
             </button>
             <button
               type="button"
+              role="tab"
+              id="tab-ledger"
+              aria-selected="false"
+              aria-controls="pane-ledger"
               data-mock-tab="ledger"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
             >
@@ -152,6 +160,10 @@
             </button>
             <button
               type="button"
+              role="tab"
+              id="tab-loop"
+              aria-selected="false"
+              aria-controls="pane-loop"
               data-mock-tab="loop"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
             >
@@ -160,6 +172,10 @@
             </button>
             <button
               type="button"
+              role="tab"
+              id="tab-sync"
+              aria-selected="false"
+              aria-controls="pane-sync"
               data-mock-tab="sync"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
             >
@@ -171,7 +187,7 @@
           <!-- Terminal Content Panes -->
           <div class="p-5 font-mono text-xs sm:text-[13px] leading-relaxed overflow-x-auto grow">
             <!-- Pane 1: Critique -->
-            <div id="pane-critique" class="tab-pane block space-y-3">
+            <div id="pane-critique" role="tabpanel" aria-labelledby="tab-critique" class="tab-pane block space-y-3">
               <div class="text-[var(--loom-muted)]">
                 <span class="text-[var(--loom-cyan)] font-bold">Codex</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/activescribe-streaming-r2</span> &gt; <span class="text-[var(--loom-amber)]">feat/audio-stream</span>
               </div>
@@ -207,7 +223,7 @@
             </div>
 
             <!-- Pane 2: Ledger -->
-            <div id="pane-ledger" class="tab-pane hidden space-y-3">
+            <div id="pane-ledger" role="tabpanel" aria-labelledby="tab-ledger" class="tab-pane hidden space-y-3">
               <div class="text-[var(--loom-muted)] flex items-center justify-between">
                 <span>review-ledger.json &mdash; commit-pinned cryptographic audit record</span>
                 <span class="text-[var(--loom-accent)] font-semibold">VERIFIED</span>
@@ -242,7 +258,7 @@
             </div>
 
             <!-- Pane 3: Loop -->
-            <div id="pane-loop" class="tab-pane hidden space-y-3">
+            <div id="pane-loop" role="tabpanel" aria-labelledby="tab-loop" class="tab-pane hidden space-y-3">
               <div class="text-[var(--loom-muted)]">
                 <span class="text-[var(--loom-cyan)] font-bold">agent-loop</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/activebill-1274</span>
               </div>
@@ -265,7 +281,7 @@
             </div>
 
             <!-- Pane 4: Sync -->
-            <div id="pane-sync" class="tab-pane hidden space-y-3">
+            <div id="pane-sync" role="tabpanel" aria-labelledby="tab-sync" class="tab-pane hidden space-y-3">
               <div class="text-[var(--loom-muted)]">
                 <span class="text-[var(--loom-cyan)] font-bold">sync-engine v2</span> &mdash; Fleet propagation
               </div>
@@ -322,6 +338,7 @@
     function selectTab(target) {
       tabs.forEach((tab) => {
         const isMatch = tab.getAttribute('data-mock-tab') === target;
+        tab.setAttribute('aria-selected', isMatch ? 'true' : 'false');
         if (isMatch) {
           tab.classList.add('border-b-[var(--loom-accent)]', 'text-[var(--loom-text)]', 'font-semibold', 'bg-[var(--loom-code)]');
           tab.classList.remove('border-b-transparent', 'text-[var(--loom-muted)]');

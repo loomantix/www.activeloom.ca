@@ -1,0 +1,23 @@
+# robots.txt for activeloom.dev / activeloom.ca
+# AI agents and search bots are explicitly welcomed.
+
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /agent-guide.md
+
+# AI Crawlers & Coding Assistants
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://activeloom.dev/sitemap.xml
