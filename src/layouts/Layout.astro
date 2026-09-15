@@ -1,17 +1,54 @@
 ---
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = 'ActiveLoom: Reusable Engineering Workflows for Coding Agents',
   description = 'Skills, adversarial PR review protocols, verifiable commit ledgers, and bounded issue loops for Claude Code, Codex, and Gemini. One upstream, many repos.',
+  noindex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, 'https://activeloom.dev');
+const SITE = 'https://activeloom.dev';
+const canonicalURL = new URL(Astro.url.pathname, SITE);
+const ogImage = new URL('/og.png', SITE);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.loomantix.com/#organization',
+      name: 'Loomantix Inc.',
+      url: 'https://www.loomantix.com',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}/#website`,
+      name: 'ActiveLoom',
+      url: `${SITE}/`,
+      publisher: { '@id': 'https://www.loomantix.com/#organization' },
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      '@id': `${SITE}/#software`,
+      name: 'ActiveLoom',
+      description,
+      url: `${SITE}/`,
+      codeRepository: 'https://github.com/loomantix/activeloom',
+      license: 'https://www.apache.org/licenses/LICENSE-2.0',
+      author: { '@id': 'https://www.loomantix.com/#organization' },
+      sameAs: ['https://github.com/loomantix/activeloom'],
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -21,7 +58,10 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://activeloom.dev');
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonicalURL} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="text/plain" title="LLM documentation index" href="/llms.txt" />
+    <meta name="theme-color" content="#0d0f14" />
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website" />
@@ -29,17 +69,16 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://activeloom.dev');
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="ActiveLoom" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ActiveLoom — reusable engineering workflows for coding agents" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
 
     <!-- Theme / Ground Script -->
     <script is:inline>

@@ -44,8 +44,8 @@
               >
                 <span class="w-2 h-2 rounded-full bg-[var(--loom-amber)]"></span>
                 <div class="truncate">
-                  <div class="font-bold">activescribe</div>
-                  <div class="text-[10px] text-[var(--loom-muted)]">PR #242 · staging</div>
+                  <div class="font-bold">api-gateway</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">PR #242 · main</div>
                 </div>
               </button>
 
@@ -56,7 +56,7 @@
               >
                 <span class="w-2 h-2 rounded-full bg-[var(--loom-cyan)]"></span>
                 <div class="truncate">
-                  <div class="font-bold">activebill</div>
+                  <div class="font-bold">billing-service</div>
                   <div class="text-[10px] text-[var(--loom-muted)]">issue #1274 · worktree</div>
                 </div>
               </button>
@@ -68,7 +68,7 @@
               >
                 <span class="w-2 h-2 rounded-full bg-[var(--loom-accent)]"></span>
                 <div class="truncate">
-                  <div class="font-bold">activeinfra</div>
+                  <div class="font-bold">infra-modules</div>
                   <div class="text-[10px] text-[var(--loom-muted)]">upstream sync · clean</div>
                 </div>
               </button>
@@ -189,31 +189,31 @@
             <!-- Pane 1: Critique -->
             <div id="pane-critique" role="tabpanel" aria-labelledby="tab-critique" class="tab-pane block space-y-3">
               <div class="text-[var(--loom-muted)]">
-                <span class="text-[var(--loom-cyan)] font-bold">Codex</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/activescribe-streaming-r2</span> &gt; <span class="text-[var(--loom-amber)]">feat/audio-stream</span>
+                <span class="text-[var(--loom-cyan)] font-bold">Codex</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/api-gateway-pr-242</span> &gt; <span class="text-[var(--loom-amber)]">feat/session-refresh</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[var(--loom-accent)] font-bold">❯</span>
                 <span class="text-[var(--loom-text)] font-semibold">activeloom critique deep --pr 242</span>
               </div>
               <div class="text-[var(--loom-muted)] pl-4 border-l border-[var(--loom-border)] space-y-1">
-                <div>[protocol] Draft PR #242 verified. Review tier resolved: <span class="text-[var(--loom-amber)] font-bold">DEEP</span> (Trigger 2: Audio mutation & encryption boundary)</div>
+                <div>[protocol] Draft PR #242 verified. Review tier resolved: <span class="text-[var(--loom-amber)] font-bold">DEEP</span> (Trigger: auth &amp; session boundary)</div>
                 <div>[protocol] Preflight diff validation: 4 files changed, +142 lines, -18 lines.</div>
                 <div>[protocol] Executing adversarial pass across 5 deep review lanes...</div>
               </div>
               <div class="p-3 rounded bg-[var(--loom-panel)] border border-[var(--loom-coral)]/40 text-[var(--loom-coral)]">
                 <div class="font-bold flex items-center gap-2">
-                  <span>✖</span> DEFECT DETECTED: Unencrypted database update on encrypted column
+                  <span>✖</span> DEFECT DETECTED: Refresh token written to application logs
                 </div>
                 <div class="text-xs text-[var(--loom-text)] mt-1">
-                  File: <code class="text-[var(--loom-cyan)]">apps/backend/src/transcription/stream.service.ts#L142</code>
+                  File: <code class="text-[var(--loom-cyan)]">src/auth/refresh.ts#L142</code>
                 </div>
                 <div class="text-xs text-[var(--loom-muted)] mt-1">
-                  Violation: Column `bx_raw_payload` updated directly without `e_id` encapsulation. Violates HIPAA/PHIPA encryption invariant.
+                  Violation: raw request metadata, including the refresh token, is passed to <code>logger.info()</code>. Breaks the repo's no-secrets-in-logs invariant.
                 </div>
               </div>
               <div class="space-y-1 text-[var(--loom-muted)]">
                 <div><span class="text-[var(--loom-accent)]">✔</span> Posted verified defect inline to PR #242 comment thread (commit: <code class="text-[var(--loom-text)]">4d2e1b</code>).</div>
-                <div><span class="text-[var(--loom-accent)]">✔</span> Automated fix diff prepared using <code class="text-[var(--loom-text)]">safeEncryptedUpdate()</code> from shared package.</div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> Automated fix diff prepared using <code class="text-[var(--loom-text)]">redactSecrets()</code> from shared package.</div>
                 <div class="flex items-center gap-2 text-[var(--loom-text)]">
                   <span class="braille-spinner text-[var(--loom-accent)] font-bold">⠋</span>
                   <span>Awaiting second-opinion verification from Gemini...</span>
@@ -250,8 +250,8 @@
     &#125;
   &#125;,
   <span class="text-[var(--loom-cyan)]">"invariantsVerified"</span>: [
-    <span class="text-[var(--loom-text)]">"encryption_eid_enforced"</span>,
-    <span class="text-[var(--loom-text)]">"zero_phi_telemetry"</span>,
+    <span class="text-[var(--loom-text)]">"no_secrets_in_logs"</span>,
+    <span class="text-[var(--loom-text)]">"auth_boundary_tested"</span>,
     <span class="text-[var(--loom-text)]">"strict_typescript_no_any"</span>
   ]
 &#125;</pre>
@@ -260,7 +260,7 @@
             <!-- Pane 3: Loop -->
             <div id="pane-loop" role="tabpanel" aria-labelledby="tab-loop" class="tab-pane hidden space-y-3">
               <div class="text-[var(--loom-muted)]">
-                <span class="text-[var(--loom-cyan)] font-bold">agent-loop</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/activebill-1274</span>
+                <span class="text-[var(--loom-cyan)] font-bold">agent-loop</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/billing-service-1274</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[var(--loom-accent)] font-bold">❯</span>
@@ -268,7 +268,7 @@
               </div>
               <div class="space-y-1 text-[var(--loom-muted)]">
                 <div>[queue] Issue #1274 allowlisted: <span class="text-[var(--loom-text)]">"Fix allocator floor calculation on tiered accounts"</span></div>
-                <div>[worktree] Provisioned isolated worktree: <code class="text-[var(--loom-cyan)]">~/wt/activebill-1274</code> from <code class="text-[var(--loom-text)]">origin/staging</code></div>
+                <div>[worktree] Provisioned isolated worktree: <code class="text-[var(--loom-cyan)]">~/wt/billing-service-1274</code> from <code class="text-[var(--loom-text)]">origin/main</code></div>
                 <div>[repro] Generated regression test: <code class="text-[var(--loom-text)]">tests/allocator-floor.spec.ts</code></div>
                 <div>[code] Modified <code class="text-[var(--loom-cyan)]">packages/core/allocator.ts</code> &mdash; complexity checked (24 logical lines)</div>
                 <div><span class="text-[var(--loom-accent)]">✔</span> Test suite passed: 14 assertions clean in 840ms.</div>

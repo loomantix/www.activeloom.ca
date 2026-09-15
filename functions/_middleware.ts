@@ -5,6 +5,7 @@ type PagesFunction = (context: {
 
 const HSTS_HEADER = 'max-age=63072000; includeSubDomains; preload';
 const CANONICAL_HOST = 'activeloom.dev';
+const VARY_HEADER = 'User-Agent, Accept';
 
 const CLI_TERMINAL_OUTPUT = `
 \x1b[1;32m◱ active|loom\x1b[0m — Reusable engineering workflows for coding agents
@@ -56,19 +57,26 @@ export const onRequest: PagesFunction = async (context) => {
   }
 
   // 3. CLI / Terminal Content Negotiation
-  // When requested from curl or with explicit text/plain at root path, return ANSI terminal text
-  if (
-    url.pathname === '/' &&
-    (userAgent.startsWith('curl/') || (accept.includes('text/plain') && !accept.includes('text/html')))
-  ) {
-    return new Response(CLI_TERMINAL_OUTPUT.trim() + '\n', {
-      status: 200,
-      headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Strict-Transport-Security': HSTS_HEADER,
-        'Cache-Control': 'public, max-age=3600',
-      },
-    });
+  // When requested from curl or with explicit text/plain at root path, return ANSI terminal text.
+  // Both representations of `/` carry Vary so no shared cache hands the ANSI text to a browser
+  // (or the HTML to curl).
+  if (url.pathname === '/') {
+    if (userAgent.startsWith('curl/') || (accept.includes('text/plain') && !accept.includes('text/html'))) {
+      return new Response(CLI_TERMINAL_OUTPUT.trim() + '\n', {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+          'Strict-Transport-Security': HSTS_HEADER,
+          'Cache-Control': 'public, max-age=3600',
+          Vary: VARY_HEADER,
+        },
+      });
+    }
+
+    const response = await context.next();
+    const negotiated = new Response(response.body, response);
+    negotiated.headers.set('Vary', VARY_HEADER);
+    return negotiated;
   }
 
   return context.next();
