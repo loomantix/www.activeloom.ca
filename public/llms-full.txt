@@ -1,6 +1,6 @@
 # ActiveLoom Documentation Index for Coding Agents
 
-> Reusable engineering workflows, adversarial review protocols, verifiable commit ledgers, and bounded automation for Claude Code, Codex, and Gemini.
+> Reusable engineering workflows, adversarial review protocols, commit-pinned review ledgers, and bounded automation for Claude Code, Codex, and Gemini.
 
 Use this index to load only the specific workflow or reference needed for your current task. For full context ingestion in one request, fetch https://activeloom.dev/llms-full.txt.
 
@@ -15,22 +15,22 @@ Use this index to load only the specific workflow or reference needed for your c
 - [diagnosing-bugs](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/diagnosing-bugs/SKILL.md): Disciplined diagnosis loop for hard bugs and regressions: isolate, repro, RCA, minimal verified fix.
 - [feature-dev](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/feature-dev/SKILL.md): Guided feature development with codebase understanding and architecture focus.
 - [task-packet](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/task-packet/SKILL.md): Execute an implementation task packet end-to-end (code, tests, PR, closure).
-- [agent-loop](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/agent-loop/SKILL.md): Autonomous issue implementation loop with strict allowlisting, isolated worktrees, and draft-PR review hooks.
-- [critique](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/critique/SKILL.md): PR-first adversarial review. Posts verified findings inline before fixing. Lean mode (2 signal lanes) vs Deep mode.
-- [deepcritique](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/deepcritique/SKILL.md): Exhaustive multi-lane review for high blast-radius changes.
+- [agent-loop](https://raw.githubusercontent.com/loomantix/activeloom/main/.codex/skills/agent-loop/SKILL.md): Autonomous issue implementation loop with strict allowlisting, isolated worktrees, and draft-PR review hooks.
+- [critique](https://raw.githubusercontent.com/loomantix/activeloom/main/.claude/skills/critique/SKILL.md): PR-first adversarial review. Posts verified findings inline before fixing. Lean mode (highest-signal lenses) vs Deep mode (full relevant review matrix).
+- [deepcritique](https://raw.githubusercontent.com/loomantix/activeloom/main/.claude/skills/deepcritique/SKILL.md): Exhaustive multi-lane review for high blast-radius changes.
 
 ## Review Protocols & Ledgers
 
 - [Review Workflow](https://raw.githubusercontent.com/loomantix/activeloom/main/.codex/REVIEW_WORKFLOW.md): Canonical PR-first review lifecycle, review tiers (Lean vs Deep), and multi-engine convergence.
-- [Review Ledger Protocol](https://raw.githubusercontent.com/loomantix/activeloom/main/docs/review-learning-loop.md): JSON cryptographic evidence binding review findings and signatures to exact Git commit SHAs.
+- [Review Ledger Protocol](https://raw.githubusercontent.com/loomantix/activeloom/main/.claude/references/local-review-ledger.md): Engine-neutral contract. The draft PR is the ledger: roster and attestation markers carry sha256 digests and name the exact head commit they cover. Evidence, not a merge gate.
 
 ## CLI & Installation
 
 - CLI commands:
-  - `npx activeloom init --harness codex,claude,gemini`: Initialize repository with selected harness trees.
-  - `npx activeloom add <skill> --harness <id>`: Install a specific skill personal/locally.
-  - `npx activeloom init --sync`: Add weekly scheduled GitHub Actions workflow proposing updates via PRs.
-- Requirements: Node 18.17+ or Python 3.9+.
+  - `npx activeloom init --harness claude --harness codex --harness gemini`: Write the selected harness trees into this repository (`--harness` is repeatable; omit it to use detection).
+  - `npx activeloom add <skill> --harness <id>`: Install a skill for yourself (Tier 0).
+  - `npx activeloom init --sync`: Add a daily scheduled GitHub Actions workflow that proposes updates via PRs (Tier 2). `--sync --app` uses a GitHub App for signed commits (Tier 3).
+- Requirements: Node 18.17+ for the CLI; `init` also needs Python 3.9+ with PyYAML.
 
 ## Complete Reference Bundle
 
@@ -68,7 +68,7 @@ When the session already has an implementation or review task, append its concre
 4. Establish the installed revision where available: configured upstream ref, latest merged sync commit, and ledger version/integrity files for review work. A movable tag name alone does not prove which bytes are installed.
 5. Read only the selected skill and the references it requires. Check tools, authentication, and prerequisites before attempting its workflow. An installed prompt is not evidence that a reviewer launcher is usable.
 
-If ActiveLoom is absent, use [Getting started](getting-started.md) to prepare the appropriate installation. If it is already present, prefer the installed contract and diagnose missing or outdated pieces before replacing files.
+If ActiveLoom is absent, use [Getting started](https://github.com/loomantix/activeloom/blob/main/docs/getting-started.md) to prepare the appropriate installation. If it is already present, prefer the installed contract and diagnose missing or outdated pieces before replacing files.
 
 ## Select by task
 
@@ -93,17 +93,17 @@ Names below identify skills; use the invocation supported by the current harness
 
 Specialized skills also exist, such as Actions usage auditing, mobile installation, accessibility review, and package publication. Their presence varies by harness; inspect their requirements rather than treating the toolkit as a uniform menu.
 
-Not every artifact here is a skill: [`claude/github-api-usage.md`](../claude/github-api-usage.md) is drop-in guidance on rate-limit-aware GitHub API usage, written to be pasted into a project's own agent guide.
+Not every artifact here is a skill: [`claude/github-api-usage.md`](https://github.com/loomantix/activeloom/blob/main/claude/github-api-usage.md) is drop-in guidance on rate-limit-aware GitHub API usage, written to be pasted into a project's own agent guide.
 
 ## Review an existing PR
 
-Read the installed harness's `REVIEW_WORKFLOW.md`, then `references/local-review-ledger.md`, then the selected review skill. Upstream entry points are [Claude](../.claude/REVIEW_WORKFLOW.md), [Codex](../.codex/REVIEW_WORKFLOW.md), and [Gemini/Agy](../.agents/REVIEW_WORKFLOW.md).
+Read the installed harness's `REVIEW_WORKFLOW.md`, then `references/local-review-ledger.md`, then the selected review skill. Upstream entry points are [Claude](https://github.com/loomantix/activeloom/blob/main/.claude/REVIEW_WORKFLOW.md), [Codex](https://github.com/loomantix/activeloom/blob/main/.codex/REVIEW_WORKFLOW.md), and [Gemini/Agy](https://github.com/loomantix/activeloom/blob/main/.agents/REVIEW_WORKFLOW.md).
 
 The protocol uses a draft PR as shared review context. Reviewers record verified findings before fixes, then push, reply with validation, and resolve threads. Evidence belongs to a specific head commit. Read both resolved and unresolved findings so another engine does not rediscover or contradict prior work without examining it.
 
 Lean and Deep describe review scope and budgets. Resolve them from the installed workflow's triggers; the size of a diff or the presence of a `deepcritique` skill is not sufficient to choose a tier. The workflow defines how explicit deep-review requests are handled.
 
-For automatic chains, follow the [runner reference](../.codex/references/review-chain-runner.md). The runner lives in the Codex control surface and can coordinate the supported engines. Selecting only Claude or Gemini at installation does not install that controller. A skill copied with `add` is also not proof that all peer reviewers and their supporting skills are installed.
+For automatic chains, follow the [runner reference](https://github.com/loomantix/activeloom/blob/main/.codex/references/review-chain-runner.md). The runner lives in the Codex control surface and can coordinate the supported engines. Selecting only Claude or Gemini at installation does not install that controller. A skill copied with `add` is also not proof that all peer reviewers and their supporting skills are installed.
 
 Use checked-in launchers and the required validation commands. Launcher failure, missing evidence, and exhausted budgets must be reported as such. A fixed plan can complete without independent convergence. Success does not authorize merge, deployment, or a new run with a reset budget.
 
@@ -118,7 +118,7 @@ Use checked-in launchers and the required validation commands. Launcher failure,
 
 Use explicit `--harness` selections and preview the change. `init --dry-run` on a new consumer cannot render the full tree until its config exists; its output reports that limitation. Review the actual generated diff after installation and fill `TODO(activeloom)` fields before relying on the resulting project guidance.
 
-Scheduled sync requires its workflow on the default branch and the appropriate repository permissions. A generated workflow file is not proof of an enabled or successful schedule. See [setup](getting-started.md) for requirements and [sync](sync.md) for ownership and migration.
+Scheduled sync requires its workflow on the default branch and the appropriate repository permissions. A generated workflow file is not proof of an enabled or successful schedule. See [setup](https://github.com/loomantix/activeloom/blob/main/docs/getting-started.md) for requirements and [sync](https://github.com/loomantix/activeloom/blob/main/docs/sync.md) for ownership and migration.
 
 ## Know which source to edit
 
@@ -133,10 +133,10 @@ Scheduled sync requires its workflow on the default branch and the appropriate r
 | Consumer `.activeloom-config.yml`         | Harness selection, substitutions, path permissions, opt-outs | Owned by that consumer                                                                         |
 | Consumer `.review/addendum.local.md`      | Repository-specific review lessons                           | Keep local context here; sync preserves it                                                     |
 
-Review prompts intentionally retain engine-specific implementations. Do not consolidate them merely because their names match. Read [prompt rendering](prompt-rendering.md), [decision records](decisions/README.md), and [Contributing](../CONTRIBUTING.md) before changing the shared source.
+Review prompts intentionally retain engine-specific implementations. Do not consolidate them merely because their names match. Read [prompt rendering](https://github.com/loomantix/activeloom/blob/main/docs/prompt-rendering.md), [decision records](https://github.com/loomantix/activeloom/blob/main/docs/decisions/README.md), and [Contributing](https://github.com/loomantix/activeloom/blob/main/CONTRIBUTING.md) before changing the shared source.
 
 ## Report a useful assessment
 
 Return the applicable skill or controller, the installed harness and source you inspected, the missing prerequisites, the files an installation would change, and the next action justified by the user's task. For a review result, also distinguish completed work from missing current-head evidence and name the actual runner outcome when used.
 
-Keep secrets, private project details, and operational logs out of public ActiveLoom issues and contributions. Generic lessons may belong upstream; repository-specific lessons belong in the consumer. The [review learning loop](review-learning-loop.md) explains that distinction.
+Keep secrets, private project details, and operational logs out of public ActiveLoom issues and contributions. Generic lessons may belong upstream; repository-specific lessons belong in the consumer. The [review learning loop](https://github.com/loomantix/activeloom/blob/main/docs/review-learning-loop.md) explains that distinction.

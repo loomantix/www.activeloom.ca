@@ -45,7 +45,7 @@
                 <span class="w-2 h-2 rounded-full bg-[var(--loom-amber)]"></span>
                 <div class="truncate">
                   <div class="font-bold">api-gateway</div>
-                  <div class="text-[10px] text-[var(--loom-muted)]">PR #242 · main</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">PR #57 · main</div>
                 </div>
               </button>
 
@@ -57,7 +57,7 @@
                 <span class="w-2 h-2 rounded-full bg-[var(--loom-cyan)]"></span>
                 <div class="truncate">
                   <div class="font-bold">billing-service</div>
-                  <div class="text-[10px] text-[var(--loom-muted)]">issue #1274 · worktree</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">issue #88 · worktree</div>
                 </div>
               </button>
 
@@ -155,7 +155,7 @@
               data-mock-tab="ledger"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
             >
-              <span>2. review-ledger.json</span>
+              <span>2. PR ledger</span>
               <span class="w-1.5 h-1.5 rounded-full bg-[var(--loom-accent)]"></span>
             </button>
             <button
@@ -189,16 +189,16 @@
             <!-- Pane 1: Critique -->
             <div id="pane-critique" role="tabpanel" aria-labelledby="tab-critique" class="tab-pane block space-y-3">
               <div class="text-[var(--loom-muted)]">
-                <span class="text-[var(--loom-cyan)] font-bold">Codex</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/api-gateway-pr-242</span> &gt; <span class="text-[var(--loom-amber)]">feat/session-refresh</span>
+                <span class="text-[var(--loom-cyan)] font-bold">Codex</span> on <span class="text-[var(--loom-text)] font-semibold">api-gateway (PR #57 worktree)</span> &gt; <span class="text-[var(--loom-amber)]">feat/session-refresh</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[var(--loom-accent)] font-bold">❯</span>
-                <span class="text-[var(--loom-text)] font-semibold">activeloom critique deep --pr 242</span>
+                <span class="text-[var(--loom-text)] font-semibold">/critique deep</span>
               </div>
               <div class="text-[var(--loom-muted)] pl-4 border-l border-[var(--loom-border)] space-y-1">
-                <div>[protocol] Draft PR #242 verified. Review tier resolved: <span class="text-[var(--loom-amber)] font-bold">DEEP</span> (Trigger: auth &amp; session boundary)</div>
+                <div>[protocol] Draft PR #57 found. Review tier resolved: <span class="text-[var(--loom-amber)] font-bold">DEEP</span> (Trigger: auth &amp; session boundary)</div>
                 <div>[protocol] Preflight diff validation: 4 files changed, +142 lines, -18 lines.</div>
-                <div>[protocol] Executing adversarial pass across 5 deep review lanes...</div>
+                <div>[protocol] Running the deep review matrix...</div>
               </div>
               <div class="p-3 rounded bg-[var(--loom-panel)] border border-[var(--loom-coral)]/40 text-[var(--loom-coral)]">
                 <div class="font-bold flex items-center gap-2">
@@ -212,7 +212,7 @@
                 </div>
               </div>
               <div class="space-y-1 text-[var(--loom-muted)]">
-                <div><span class="text-[var(--loom-accent)]">✔</span> Posted verified defect inline to PR #242 comment thread (commit: <code class="text-[var(--loom-text)]">4d2e1b</code>).</div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> Posted verified finding inline on PR #57 (commit: <code class="text-[var(--loom-text)]">4d2e1b</code>).</div>
                 <div><span class="text-[var(--loom-accent)]">✔</span> Automated fix diff prepared using <code class="text-[var(--loom-text)]">redactSecrets()</code> from shared package.</div>
                 <div class="flex items-center gap-2 text-[var(--loom-text)]">
                   <span class="braille-spinner text-[var(--loom-accent)] font-bold">⠋</span>
@@ -225,58 +225,42 @@
             <!-- Pane 2: Ledger -->
             <div id="pane-ledger" role="tabpanel" aria-labelledby="tab-ledger" class="tab-pane hidden space-y-3">
               <div class="text-[var(--loom-muted)] flex items-center justify-between">
-                <span>review-ledger.json &mdash; commit-pinned cryptographic audit record</span>
-                <span class="text-[var(--loom-accent)] font-semibold">VERIFIED</span>
+                <span>PR #57 ledger &mdash; review evidence pinned to the head commit</span>
+                <span class="text-[var(--loom-accent)] font-semibold">CONVERGED</span>
               </div>
-              <pre class="p-4 rounded bg-[var(--loom-panel)] border border-[var(--loom-border)] text-xs text-[var(--loom-text)] overflow-x-auto leading-relaxed">
-&#123;
-  <span class="text-[var(--loom-cyan)]">"$schema"</span>: <span class="text-[var(--loom-accent)]">"https://activeloom.ca/schemas/review-ledger-v1.json"</span>,
-  <span class="text-[var(--loom-cyan)]">"commitSha"</span>: <span class="text-[var(--loom-amber)]">"4d2e1b89ef01a23c7b89d2140f1a94e82b7c65d3"</span>,
-  <span class="text-[var(--loom-cyan)]">"prNumber"</span>: 242,
-  <span class="text-[var(--loom-cyan)]">"reviewTier"</span>: <span class="text-[var(--loom-amber)]">"deep"</span>,
-  <span class="text-[var(--loom-cyan)]">"convergenceState"</span>: <span class="text-[var(--loom-accent)]">"CONVERGED"</span>,
-  <span class="text-[var(--loom-cyan)]">"signatures"</span>: &#123;
-    <span class="text-[var(--loom-cyan)]">"codex-critique"</span>: &#123;
-      <span class="text-[var(--loom-cyan)]">"timestamp"</span>: <span class="text-[var(--loom-muted)]">"2026-09-14T22:15:30Z"</span>,
-      <span class="text-[var(--loom-cyan)]">"status"</span>: <span class="text-[var(--loom-accent)]">"APPROVED_AFTER_FIX"</span>,
-      <span class="text-[var(--loom-cyan)]">"findingsResolved"</span>: 1,
-      <span class="text-[var(--loom-cyan)]">"unresolvedBlockers"</span>: 0
-    &#125;,
-    <span class="text-[var(--loom-cyan)]">"gemini-second-opinion"</span>: &#123;
-      <span class="text-[var(--loom-cyan)]">"timestamp"</span>: <span class="text-[var(--loom-muted)]">"2026-09-14T22:18:12Z"</span>,
-      <span class="text-[var(--loom-cyan)]">"status"</span>: <span class="text-[var(--loom-accent)]">"APPROVED"</span>,
-      <span class="text-[var(--loom-cyan)]">"findingsResolved"</span>: 0,
-      <span class="text-[var(--loom-cyan)]">"unresolvedBlockers"</span>: 0
-    &#125;
-  &#125;,
-  <span class="text-[var(--loom-cyan)]">"invariantsVerified"</span>: [
-    <span class="text-[var(--loom-text)]">"no_secrets_in_logs"</span>,
-    <span class="text-[var(--loom-text)]">"auth_boundary_tested"</span>,
-    <span class="text-[var(--loom-text)]">"strict_typescript_no_any"</span>
-  ]
-&#125;</pre>
+              <pre class="p-4 rounded bg-[var(--loom-panel)] border border-[var(--loom-border)] text-xs text-[var(--loom-text)] overflow-x-auto leading-relaxed">&lt;!-- local-review-roster:v2 author=<span class="text-[var(--loom-cyan)]">claude</span> reviewers=<span class="text-[var(--loom-cyan)]">codex,gemini</span>
+     head=<span class="text-[var(--loom-amber)]">4d2e1b89ef01a23c7b89d2140f1a94e82b7c65d3</span> supersedes=none
+     declaration-sha256=<span class="text-[var(--loom-muted)]">9f3c0d…e1a7</span> --&gt;</pre>
+              <div class="space-y-1 text-[var(--loom-muted)]">
+                <div><span class="text-[var(--loom-accent)]">✔</span> <span class="text-[var(--loom-text)]">codex</span> attested head <code class="text-[var(--loom-amber)]">4d2e1b8</code> &middot; 1 finding fixed &middot; 0 open</div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> <span class="text-[var(--loom-text)]">gemini</span> attested head <code class="text-[var(--loom-amber)]">4d2e1b8</code> &middot; 0 findings</div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> <code class="text-[var(--loom-text)]">verify-coverage</code>: every declared reviewer attested the current head</div>
+              </div>
+              <div class="text-[var(--loom-muted)] text-xs">
+                A new commit moves the head and invalidates only the attestations that named the old one. The ledger is evidence, not a merge gate.
+              </div>
             </div>
 
             <!-- Pane 3: Loop -->
             <div id="pane-loop" role="tabpanel" aria-labelledby="tab-loop" class="tab-pane hidden space-y-3">
               <div class="text-[var(--loom-muted)]">
-                <span class="text-[var(--loom-cyan)] font-bold">agent-loop</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/billing-service-1274</span>
+                <span class="text-[var(--loom-cyan)] font-bold">agent-loop</span> on <span class="text-[var(--loom-text)] font-semibold">issue-88 worktree</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[var(--loom-accent)] font-bold">❯</span>
-                <span class="text-[var(--loom-text)] font-semibold">activeloom agent-loop run --issue 1274</span>
+                <span class="text-[var(--loom-text)] font-semibold">/agent-loop</span>
               </div>
               <div class="space-y-1 text-[var(--loom-muted)]">
-                <div>[queue] Issue #1274 allowlisted: <span class="text-[var(--loom-text)]">"Fix allocator floor calculation on tiered accounts"</span></div>
-                <div>[worktree] Provisioned isolated worktree: <code class="text-[var(--loom-cyan)]">~/wt/billing-service-1274</code> from <code class="text-[var(--loom-text)]">origin/main</code></div>
+                <div>[queue] Issue #88 allowlisted: <span class="text-[var(--loom-text)]">"Fix allocator floor calculation on tiered accounts"</span></div>
+                <div>[worktree] Provisioned isolated worktree: <code class="text-[var(--loom-cyan)]">/tmp/agent-loop-worktrees/issue-88</code> from <code class="text-[var(--loom-text)]">origin/main</code></div>
                 <div>[repro] Generated regression test: <code class="text-[var(--loom-text)]">tests/allocator-floor.spec.ts</code></div>
                 <div>[code] Modified <code class="text-[var(--loom-cyan)]">packages/core/allocator.ts</code> &mdash; complexity checked (24 logical lines)</div>
                 <div><span class="text-[var(--loom-accent)]">✔</span> Test suite passed: 14 assertions clean in 840ms.</div>
                 <div><span class="text-[var(--loom-accent)]">✔</span> Atomic conventional commit created: <code class="text-[var(--loom-text)]">fix(allocator): clamp floor value to zero</code></div>
-                <div><span class="text-[var(--loom-accent)]">✔</span> Pushed draft PR #412. Local /critique hook completed with 0 blockers.</div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> Opened draft PR #58. Local critique pass: 0 blockers.</div>
               </div>
               <div class="p-2.5 rounded bg-[var(--loom-accent-glow)] border border-[var(--loom-accent)]/30 text-[var(--loom-accent)] font-bold flex items-center gap-2">
-                <span>✔</span> Issue #1274 resolved autonomously. Ready for maintainer merge.
+                <span>✔</span> Issue #88 fixed on a draft PR. Waiting for maintainer review.
               </div>
             </div>
 
@@ -287,13 +271,13 @@
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[var(--loom-accent)] font-bold">❯</span>
-                <span class="text-[var(--loom-text)] font-semibold">python3 scripts/sync-engine.py --consumer-dir . --config .activeloom-config.yml</span>
+                <span class="text-[var(--loom-text)] font-semibold">python3 scripts/sync-engine.py --upstream-repo ../activeloom --consumer-dir .</span>
               </div>
               <div class="space-y-1 text-[var(--loom-muted)]">
                 <div>[sync] Source: <code class="text-[var(--loom-cyan)]">loomantix/activeloom@sync-v2</code> (commit: <code class="text-[var(--loom-text)]">986a66b</code>)</div>
                 <div>[sync] Updating upstream-managed skills and review workflows:</div>
                 <div class="pl-4 text-[var(--loom-text)]">
-                  <div>→ <code class="text-[var(--loom-cyan)]">.agents/skills/critique/SKILL.md</code> (updated to v2.4.0)</div>
+                  <div>→ <code class="text-[var(--loom-cyan)]">.agents/skills/critique/SKILL.md</code> (updated)</div>
                   <div>→ <code class="text-[var(--loom-cyan)]">.codex/REVIEW_WORKFLOW.md</code> (synced)</div>
                   <div>→ <code class="text-[var(--loom-cyan)]">.github/copilot-instructions.md</code> (re-rendered with project variables)</div>
                 </div>
@@ -306,7 +290,7 @@
                 </div>
               </div>
               <div class="text-[var(--loom-text)]">
-                ✔ Created clean propagation PR with signed commits. Zero local drift.
+                ✔ Opened a propagation PR for review. Consumer-owned files untouched.
               </div>
             </div>
           </div>

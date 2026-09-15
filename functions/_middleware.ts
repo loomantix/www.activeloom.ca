@@ -12,7 +12,7 @@ const CLI_TERMINAL_OUTPUT = `
 \x1b[2mClaude Code · OpenAI Codex · Google Antigravity / Gemini · Apache 2.0\x1b[0m
 
 \x1b[1mQuick Start:\x1b[0m
-  $ \x1b[36mnpx activeloom init --harness codex,claude,gemini\x1b[0m
+  $ \x1b[36mnpx activeloom init --harness claude --harness codex --harness gemini\x1b[0m
 
 \x1b[1mCore Engineering Skills:\x1b[0m
   • \x1b[33mgrill\x1b[0m            Relentless pre-code design & requirements stress test

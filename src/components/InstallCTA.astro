@@ -11,7 +11,7 @@
       Give your agents real discipline today.
     </h2>
     <p class="text-base sm:text-lg text-[var(--loom-muted)] max-w-2xl mx-auto mb-10">
-      One command to initialize your repository. Nothing about your developer workflow changes, except now your AI agents work with verifiable proof.
+      One command to initialize your repository. Your workflow stays yours. Your agents' reviews now leave evidence pinned to the commit they read.
     </p>
 
     <!-- Terminal Command Box with Selector -->
@@ -43,7 +43,7 @@
       <div class="p-5 flex items-center justify-between gap-4">
         <div class="flex items-center gap-2 overflow-x-auto">
           <span class="text-[var(--loom-accent)] font-bold select-none">$</span>
-          <span id="install-cmd-display" class="text-[var(--loom-text)] whitespace-nowrap">npx activeloom init --harness codex,claude,gemini</span>
+          <span id="install-cmd-display" class="text-[var(--loom-text)] whitespace-nowrap">npx activeloom init --harness claude --harness codex --harness gemini</span>
         </div>
         <button
           type="button"
@@ -67,7 +67,7 @@
 <script is:inline>
   (function () {
     const COMMANDS = {
-      init: 'npx activeloom init --harness codex,claude,gemini',
+      init: 'npx activeloom init --harness claude --harness codex --harness gemini',
       add: 'npx activeloom add diagnosing-bugs --harness codex',
       source: 'git clone https://github.com/loomantix/activeloom.git && cd activeloom',
     };

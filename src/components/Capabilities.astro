@@ -47,7 +47,7 @@
           </div>
           <h3 class="text-xl font-bold font-display mb-2">Claude, Codex, and Gemini in sync.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            Don't maintain three divergent prompt trees. ActiveLoom authors skills once in <code class="text-[var(--loom-text)]">prompts/</code> and renders them natively into <code class="text-[var(--loom-cyan)]">.claude/</code>, <code class="text-[var(--loom-cyan)]">.codex/</code>, and <code class="text-[var(--loom-cyan)]">.agents/</code> (Gemini / Antigravity).
+            Don't maintain three divergent prompt trees. Shared skills are authored once in <code class="text-[var(--loom-text)]">prompts/</code> and rendered into <code class="text-[var(--loom-cyan)]">.claude/</code>, <code class="text-[var(--loom-cyan)]">.codex/</code>, and <code class="text-[var(--loom-cyan)]">.agents/</code> (Gemini / Antigravity). Review prompts are tuned per engine on purpose.
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono space-y-2">
@@ -80,7 +80,7 @@
             <span class="text-[var(--loom-muted)]">Review Tier Gate:</span>
             <span class="text-[var(--loom-amber)] font-bold">Deep Tier</span>
           </div>
-          <div class="text-[10px] text-[var(--loom-muted)]">Trigger: Encryption, Auth & Telemetry boundaries</div>
+          <div class="text-[10px] text-[var(--loom-muted)]">Trigger: auth &amp; crypto boundaries</div>
           <div class="text-[10px] text-[var(--loom-accent)] font-semibold">✓ Findings posted inline before code fix</div>
         </div>
       </div>
@@ -90,20 +90,20 @@
         <div>
           <div class="flex items-center justify-between text-xs font-mono text-[var(--loom-muted)] mb-4">
             <span class="text-[var(--loom-accent)] font-bold text-sm">04</span>
-            <span>CRYPTOGRAPHIC LEDGERS</span>
+            <span>REVIEW LEDGER</span>
           </div>
-          <h3 class="text-xl font-bold font-display mb-2">Verifiable proof for every commit.</h3>
+          <h3 class="text-xl font-bold font-display mb-2">Review evidence pinned to the commit.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            A machine-readable <code class="text-[var(--loom-text)]">review-ledger.json</code> binds review evidence, passing invariants, and multi-engine signatures directly to a specific Git commit SHA. If someone amends the commit, the ledger invalidates.
+            Every review pass is recorded on the draft PR as ledger markers carrying sha256 digests and the exact head commit. Push a new commit and attestations for the old head stop counting.
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono space-y-1.5">
           <div class="flex items-center justify-between">
-            <span class="text-[var(--loom-muted)] text-[11px]">review-ledger.json</span>
-            <span class="text-[var(--loom-accent)] font-bold text-[10px]">SHA MATCHED</span>
+            <span class="text-[var(--loom-muted)] text-[11px]">PR ledger · verify-coverage</span>
+            <span class="text-[var(--loom-accent)] font-bold text-[10px]">HEAD MATCHED</span>
           </div>
-          <div class="text-[10px] text-[var(--loom-muted)] truncate">Commit: 4d2e1b89ef01a23c7b89...</div>
-          <div class="text-[10px] text-[var(--loom-accent)] font-semibold">✓ Signed by Codex + Gemini second-opinion</div>
+          <div class="text-[10px] text-[var(--loom-muted)] truncate">head=4d2e1b89ef01a23c7b89...</div>
+          <div class="text-[10px] text-[var(--loom-accent)] font-semibold">✓ Attested by Codex + Gemini reviewers</div>
         </div>
       </div>
 
@@ -116,7 +116,7 @@
           </div>
           <h3 class="text-xl font-bold font-display mb-2">Autonomous queues with guardrails.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            Let agents work your GitHub backlog safely with <code class="text-[var(--loom-text)]">agent-loop</code>. Strict issue allowlists, one isolated Git worktree per issue (<code class="text-[var(--loom-cyan)]">~/wt/*</code>), test-driven iteration, and automatic bail-outs when blocked.
+            Let agents work your GitHub backlog safely with <code class="text-[var(--loom-text)]">agent-loop</code>. Strict issue allowlists, one isolated Git worktree per issue (<code class="text-[var(--loom-cyan)]">/tmp/agent-loop-worktrees</code> by default), test-driven iteration, and automatic bail-outs when blocked.
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono space-y-1.5">
@@ -137,7 +137,7 @@
             <span class="text-[var(--loom-coral)] font-bold text-sm">06</span>
             <span>FLEET DISTRIBUTION</span>
           </div>
-          <h3 class="text-xl font-bold font-display mb-2">Sync 50 repos without losing local rules.</h3>
+          <h3 class="text-xl font-bold font-display mb-2">Sync every repo without losing local rules.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
             ActiveLoom's sync engine propagates skills and review updates via PRs (<code class="text-[var(--loom-text)]">sync-v2</code>) while strictly protecting consumer-owned security rules in <code class="text-[var(--loom-coral)]">.review/addendum.local.md</code>.
           </p>
@@ -145,7 +145,7 @@
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono space-y-1.5">
           <div class="flex items-center justify-between text-[11px]">
             <span class="text-[var(--loom-muted)]">Upstream: activeloom@sync-v2</span>
-            <span class="text-[var(--loom-accent)] font-semibold">PR #6482</span>
+            <span class="text-[var(--loom-accent)] font-semibold">PR opened</span>
           </div>
           <div class="text-[10px] text-[var(--loom-muted)]">Syncs: Core skills, review workflows</div>
           <div class="text-[10px] text-[var(--loom-accent)] font-semibold">★ Local addenda & project rules strictly preserved</div>
@@ -161,11 +161,11 @@
     if (!tapeText) return;
 
     const LINES = [
-      'activeloom agent-loop --issue 1274',
-      'git worktree add ~/wt/billing-service-1274',
+      'npx activeloom detect',
+      'npx activeloom add critique --harness claude',
       'pnpm test -- tests/allocator.spec.ts',
-      'activeloom critique --pr 412 --wait',
-      'git push origin fix/allocator-floor',
+      'git worktree add /tmp/agent-loop-worktrees/issue-88',
+      'git push -u origin fix/allocator-floor',
     ];
 
     let lineIdx = 0;

@@ -1,6 +1,6 @@
 # ActiveLoom Documentation Index for Coding Agents
 
-> Reusable engineering workflows, adversarial review protocols, verifiable commit ledgers, and bounded automation for Claude Code, Codex, and Gemini.
+> Reusable engineering workflows, adversarial review protocols, commit-pinned review ledgers, and bounded automation for Claude Code, Codex, and Gemini.
 
 Use this index to load only the specific workflow or reference needed for your current task. For full context ingestion in one request, fetch https://activeloom.dev/llms-full.txt.
 
@@ -15,22 +15,22 @@ Use this index to load only the specific workflow or reference needed for your c
 - [diagnosing-bugs](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/diagnosing-bugs/SKILL.md): Disciplined diagnosis loop for hard bugs and regressions: isolate, repro, RCA, minimal verified fix.
 - [feature-dev](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/feature-dev/SKILL.md): Guided feature development with codebase understanding and architecture focus.
 - [task-packet](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/task-packet/SKILL.md): Execute an implementation task packet end-to-end (code, tests, PR, closure).
-- [agent-loop](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/agent-loop/SKILL.md): Autonomous issue implementation loop with strict allowlisting, isolated worktrees, and draft-PR review hooks.
-- [critique](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/critique/SKILL.md): PR-first adversarial review. Posts verified findings inline before fixing. Lean mode (2 signal lanes) vs Deep mode.
-- [deepcritique](https://raw.githubusercontent.com/loomantix/activeloom/main/prompts/skills/deepcritique/SKILL.md): Exhaustive multi-lane review for high blast-radius changes.
+- [agent-loop](https://raw.githubusercontent.com/loomantix/activeloom/main/.codex/skills/agent-loop/SKILL.md): Autonomous issue implementation loop with strict allowlisting, isolated worktrees, and draft-PR review hooks.
+- [critique](https://raw.githubusercontent.com/loomantix/activeloom/main/.claude/skills/critique/SKILL.md): PR-first adversarial review. Posts verified findings inline before fixing. Lean mode (highest-signal lenses) vs Deep mode (full relevant review matrix).
+- [deepcritique](https://raw.githubusercontent.com/loomantix/activeloom/main/.claude/skills/deepcritique/SKILL.md): Exhaustive multi-lane review for high blast-radius changes.
 
 ## Review Protocols & Ledgers
 
 - [Review Workflow](https://raw.githubusercontent.com/loomantix/activeloom/main/.codex/REVIEW_WORKFLOW.md): Canonical PR-first review lifecycle, review tiers (Lean vs Deep), and multi-engine convergence.
-- [Review Ledger Protocol](https://raw.githubusercontent.com/loomantix/activeloom/main/docs/review-learning-loop.md): JSON cryptographic evidence binding review findings and signatures to exact Git commit SHAs.
+- [Review Ledger Protocol](https://raw.githubusercontent.com/loomantix/activeloom/main/.claude/references/local-review-ledger.md): Engine-neutral contract. The draft PR is the ledger: roster and attestation markers carry sha256 digests and name the exact head commit they cover. Evidence, not a merge gate.
 
 ## CLI & Installation
 
 - CLI commands:
-  - `npx activeloom init --harness codex,claude,gemini`: Initialize repository with selected harness trees.
-  - `npx activeloom add <skill> --harness <id>`: Install a specific skill personal/locally.
-  - `npx activeloom init --sync`: Add weekly scheduled GitHub Actions workflow proposing updates via PRs.
-- Requirements: Node 18.17+ or Python 3.9+.
+  - `npx activeloom init --harness claude --harness codex --harness gemini`: Write the selected harness trees into this repository (`--harness` is repeatable; omit it to use detection).
+  - `npx activeloom add <skill> --harness <id>`: Install a skill for yourself (Tier 0).
+  - `npx activeloom init --sync`: Add a daily scheduled GitHub Actions workflow that proposes updates via PRs (Tier 2). `--sync --app` uses a GitHub App for signed commits (Tier 3).
+- Requirements: Node 18.17+ for the CLI; `init` also needs Python 3.9+ with PyYAML.
 
 ## Complete Reference Bundle
 
