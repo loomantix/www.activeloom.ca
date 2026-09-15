@@ -5,10 +5,24 @@ type PagesFunction = (context: {
 
 const HSTS_HEADER = 'max-age=63072000; includeSubDomains; preload';
 
+/**
+ * Canonical hostname for the developer platform site.
+ * Defaults to 'activeloom.dev' (apex, matching herdr.dev).
+ * All traffic from activeloom.ca, www.activeloom.ca, and www.activeloom.dev 301-redirects here.
+ */
+const CANONICAL_HOST = 'activeloom.dev';
+
 export const onRequest: PagesFunction = async (context) => {
   const url = new URL(context.request.url);
-  if (url.hostname === 'activeloom.ca') {
-    url.hostname = 'www.activeloom.ca';
+  const host = url.hostname.toLowerCase();
+
+  // Redirect all secondary domains and www subdomains to canonical host
+  if (
+    host === 'activeloom.ca' ||
+    host === 'www.activeloom.ca' ||
+    host === 'www.activeloom.dev'
+  ) {
+    url.hostname = CANONICAL_HOST;
     return new Response(null, {
       status: 301,
       headers: {
@@ -17,5 +31,6 @@ export const onRequest: PagesFunction = async (context) => {
       },
     });
   }
+
   return context.next();
 };
