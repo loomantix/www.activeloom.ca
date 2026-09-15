@@ -1,5 +1,7 @@
 # ActiveLoom agent entry guide
 
+> Mirrored from [`docs/agent-guide.md`](https://github.com/loomantix/activeloom/blob/main/docs/agent-guide.md) in the ActiveLoom repository. Links point at the upstream source.
+
 Use this page to decide which part of ActiveLoom helps the current task. ActiveLoom supplies repository engineering workflows and distribution tooling. Your agent client executes those workflows using its own tools and permissions.
 
 ## Copy into a session
@@ -28,7 +30,7 @@ When the session already has an implementation or review task, append its concre
 4. Establish the installed revision where available: configured upstream ref, latest merged sync commit, and ledger version/integrity files for review work. A movable tag name alone does not prove which bytes are installed.
 5. Read only the selected skill and the references it requires. Check tools, authentication, and prerequisites before attempting its workflow. An installed prompt is not evidence that a reviewer launcher is usable.
 
-If ActiveLoom is absent, use [Getting started](getting-started.md) to prepare the appropriate installation. If it is already present, prefer the installed contract and diagnose missing or outdated pieces before replacing files.
+If ActiveLoom is absent, use [Getting started](https://github.com/loomantix/activeloom/blob/main/docs/getting-started.md) to prepare the appropriate installation. If it is already present, prefer the installed contract and diagnose missing or outdated pieces before replacing files.
 
 ## Select by task
 
@@ -53,17 +55,17 @@ Names below identify skills; use the invocation supported by the current harness
 
 Specialized skills also exist, such as Actions usage auditing, mobile installation, accessibility review, and package publication. Their presence varies by harness; inspect their requirements rather than treating the toolkit as a uniform menu.
 
-Not every artifact here is a skill: [`claude/github-api-usage.md`](../claude/github-api-usage.md) is drop-in guidance on rate-limit-aware GitHub API usage, written to be pasted into a project's own agent guide.
+Not every artifact here is a skill: [`claude/github-api-usage.md`](https://github.com/loomantix/activeloom/blob/main/claude/github-api-usage.md) is drop-in guidance on rate-limit-aware GitHub API usage, written to be pasted into a project's own agent guide.
 
 ## Review an existing PR
 
-Read the installed harness's `REVIEW_WORKFLOW.md`, then `references/local-review-ledger.md`, then the selected review skill. Upstream entry points are [Claude](../.claude/REVIEW_WORKFLOW.md), [Codex](../.codex/REVIEW_WORKFLOW.md), and [Gemini/Agy](../.agents/REVIEW_WORKFLOW.md).
+Read the installed harness's `REVIEW_WORKFLOW.md`, then `references/local-review-ledger.md`, then the selected review skill. Upstream entry points are [Claude](https://github.com/loomantix/activeloom/blob/main/.claude/REVIEW_WORKFLOW.md), [Codex](https://github.com/loomantix/activeloom/blob/main/.codex/REVIEW_WORKFLOW.md), and [Gemini/Agy](https://github.com/loomantix/activeloom/blob/main/.agents/REVIEW_WORKFLOW.md).
 
 The protocol uses a draft PR as shared review context. Reviewers record verified findings before fixes, then push, reply with validation, and resolve threads. Evidence belongs to a specific head commit. Read both resolved and unresolved findings so another engine does not rediscover or contradict prior work without examining it.
 
 Lean and Deep describe review scope and budgets. Resolve them from the installed workflow's triggers; the size of a diff or the presence of a `deepcritique` skill is not sufficient to choose a tier. The workflow defines how explicit deep-review requests are handled.
 
-For automatic chains, follow the [runner reference](../.codex/references/review-chain-runner.md). The runner lives in the Codex control surface and can coordinate the supported engines. Selecting only Claude or Gemini at installation does not install that controller. A skill copied with `add` is also not proof that all peer reviewers and their supporting skills are installed.
+For automatic chains, follow the [runner reference](https://github.com/loomantix/activeloom/blob/main/.codex/references/review-chain-runner.md). The runner lives in the Codex control surface and can coordinate the supported engines. Selecting only Claude or Gemini at installation does not install that controller. A skill copied with `add` is also not proof that all peer reviewers and their supporting skills are installed.
 
 Use checked-in launchers and the required validation commands. Launcher failure, missing evidence, and exhausted budgets must be reported as such. A fixed plan can complete without independent convergence. Success does not authorize merge, deployment, or a new run with a reset budget.
 
@@ -78,7 +80,7 @@ Use checked-in launchers and the required validation commands. Launcher failure,
 
 Use explicit `--harness` selections and preview the change. `init --dry-run` on a new consumer cannot render the full tree until its config exists; its output reports that limitation. Review the actual generated diff after installation and fill `TODO(activeloom)` fields before relying on the resulting project guidance.
 
-Scheduled sync requires its workflow on the default branch and the appropriate repository permissions. A generated workflow file is not proof of an enabled or successful schedule. See [setup](getting-started.md) for requirements and [sync](sync.md) for ownership and migration.
+Scheduled sync requires its workflow on the default branch and the appropriate repository permissions. A generated workflow file is not proof of an enabled or successful schedule. See [setup](https://github.com/loomantix/activeloom/blob/main/docs/getting-started.md) for requirements and [sync](https://github.com/loomantix/activeloom/blob/main/docs/sync.md) for ownership and migration.
 
 ## Know which source to edit
 
@@ -93,10 +95,10 @@ Scheduled sync requires its workflow on the default branch and the appropriate r
 | Consumer `.activeloom-config.yml`         | Harness selection, substitutions, path permissions, opt-outs | Owned by that consumer                                                                         |
 | Consumer `.review/addendum.local.md`      | Repository-specific review lessons                           | Keep local context here; sync preserves it                                                     |
 
-Review prompts intentionally retain engine-specific implementations. Do not consolidate them merely because their names match. Read [prompt rendering](prompt-rendering.md), [decision records](decisions/README.md), and [Contributing](../CONTRIBUTING.md) before changing the shared source.
+Review prompts intentionally retain engine-specific implementations. Do not consolidate them merely because their names match. Read [prompt rendering](https://github.com/loomantix/activeloom/blob/main/docs/prompt-rendering.md), [decision records](https://github.com/loomantix/activeloom/blob/main/docs/decisions/README.md), and [Contributing](https://github.com/loomantix/activeloom/blob/main/CONTRIBUTING.md) before changing the shared source.
 
 ## Report a useful assessment
 
 Return the applicable skill or controller, the installed harness and source you inspected, the missing prerequisites, the files an installation would change, and the next action justified by the user's task. For a review result, also distinguish completed work from missing current-head evidence and name the actual runner outcome when used.
 
-Keep secrets, private project details, and operational logs out of public ActiveLoom issues and contributions. Generic lessons may belong upstream; repository-specific lessons belong in the consumer. The [review learning loop](review-learning-loop.md) explains that distinction.
+Keep secrets, private project details, and operational logs out of public ActiveLoom issues and contributions. Generic lessons may belong upstream; repository-specific lessons belong in the consumer. The [review learning loop](https://github.com/loomantix/activeloom/blob/main/docs/review-learning-loop.md) explains that distinction.

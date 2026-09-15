@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Page not found — ActiveLoom"
+  description="This page does not exist. Head back to ActiveLoom, reusable engineering workflows for coding agents."
+  noindex
+>
+  <Nav />
+  <main class="grow flex items-center">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+      <div class="text-xs font-mono uppercase tracking-widest text-[var(--loom-coral)] mb-2">404</div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold font-display tracking-tight mb-4">Page not found.</h1>
+      <p class="text-base text-[var(--loom-muted)] mb-8">
+        Nothing lives at this path. Agents can start from
+        <a href="/llms.txt" class="underline hover:text-[var(--loom-text)]">/llms.txt</a>; humans from the home page.
+      </p>
+      <a
+        href="/"
+        class="inline-flex items-center justify-center px-4 py-2 text-sm font-mono font-semibold rounded-md border border-[var(--loom-border-active)] bg-[var(--loom-panel)] hover:border-[var(--loom-accent)] hover:text-[var(--loom-accent)] transition-all"
+      >
+        ← activeloom.dev
+      </a>
+    </div>
+  </main>
+  <Footer />
+</Layout>

@@ -20,4 +20,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://activeloom.dev/sitemap.xml
+Sitemap: https://activeloom.dev/sitemap-index.xml

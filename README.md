@@ -1,35 +1,31 @@
 # www.activeloom.ca
 
-Product and marketing website for **ActiveLoom** ([activeloom.ca](https://www.activeloom.ca)), the open source platform for reusable engineering workflows for coding agents.
+Source for **[activeloom.dev](https://activeloom.dev)**, the website for [ActiveLoom](https://github.com/loomantix/activeloom): open-source, reusable engineering workflows for coding agents.
 
-Modeled on the developer-first, terminal-native aesthetic of `herdr.dev`, with interactive multi-agent showcases, cryptographic commit ledger inspectors, dual `ink`/`paper` ground modes, and adoption tier guides.
+`activeloom.dev` is the canonical host. `activeloom.ca`, `www.activeloom.ca`, and `www.activeloom.dev` 301 to it.
 
 ## Stack
 
-- **Framework:** Astro 5
-- **Styling:** Tailwind CSS 3
-- **Edge Routing:** Cloudflare Pages with `functions/_middleware.ts` (301 apex `activeloom.ca` to `www.activeloom.ca` with HSTS)
-- **Deployment:** Cloudflare Pages auto-deploy on push to `main`
+- **Framework:** Astro 5 (static output) with Tailwind CSS 3
+- **Edge:** Cloudflare Pages. `functions/_middleware.ts` handles the canonical-host 301s, the `/agent` shortcut, and plain-text content negotiation for `curl` on `/`.
+- **Headers:** `public/_headers` (CSP and security headers; `*.pages.dev` is `noindex`)
+- **Agent-facing content:** `public/llms.txt`, `public/llms-full.txt`, `public/agent-guide.md`
+- **Deployment:** Cloudflare Pages builds `main` on merge. Changes go through pull requests.
 
 ## Commands
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Start local dev server
-pnpm dev
-
-# Type check
-pnpm check
-
-# Build production bundle
-pnpm build
-
-# Preview build locally
-pnpm preview
+pnpm install   # install dependencies
+pnpm dev       # local dev server
+pnpm check     # type check
+pnpm build     # production build to dist/
+pnpm preview   # preview the build
 ```
+
+## Security
+
+Report vulnerabilities to security@loomantix.com (see [`/.well-known/security.txt`](https://activeloom.dev/.well-known/security.txt)).
 
 ## License
 
-Apache 2.0 &mdash; Loomantix OSS.
+Code is licensed under the [Apache License 2.0](LICENSE). The Loomantix and ActiveLoom names and marks are not covered by that license; see [NOTICE](NOTICE).
