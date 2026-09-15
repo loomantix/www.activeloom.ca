@@ -1,0 +1,71 @@
+---
+---
+
+<section id="boundaries" class="py-16 sm:py-20 border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/30">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="text-xs font-mono uppercase tracking-widest text-[var(--loom-coral)] mb-2">Hard Boundaries</div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold font-display">
+        What ActiveLoom deliberately does NOT do.
+      </h2>
+      <p class="text-sm sm:text-base text-[var(--loom-muted)] mt-2">
+        Software engineering tools earn trust through explicit non-goals. We don't lock you into a cloud, hide the prompts, or replace human review.
+      </p>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="rounded-xl border border-[var(--loom-border)] bg-[var(--loom-panel)] overflow-hidden shadow-sm">
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--loom-border)]">
+        <!-- What You Get -->
+        <div class="p-6 sm:p-8 space-y-4">
+          <div class="text-xs font-mono uppercase tracking-wider text-[var(--loom-accent)] font-bold flex items-center gap-2">
+            <span>✔</span> What ActiveLoom delivers
+          </div>
+          <ul class="space-y-3.5 text-sm text-[var(--loom-muted)]">
+            <li class="flex items-start gap-2.5">
+              <span class="text-[var(--loom-accent)] mt-0.5 font-bold">✔</span>
+              <span><strong class="text-[var(--loom-text)] font-semibold">Standardized engineering skills:</strong> Planning, debugging, and review workflows that any team agent can invoke.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-[var(--loom-accent)] mt-0.5 font-bold">✔</span>
+              <span><strong class="text-[var(--loom-text)] font-semibold">PR-first adversarial review:</strong> Verified findings posted inline to GitHub before code modifications occur.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-[var(--loom-accent)] mt-0.5 font-bold">✔</span>
+              <span><strong class="text-[var(--loom-text)] font-semibold">Cryptographic review ledgers:</strong> Machine-readable proof of review convergence tied directly to git commit SHAs.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-[var(--loom-accent)] mt-0.5 font-bold">✔</span>
+              <span><strong class="text-[var(--loom-text)] font-semibold">Upstream fleet sync:</strong> Keep 50 repositories updated via automated PRs without clobbering repo-local rules.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- What We Avoid -->
+        <div class="p-6 sm:p-8 space-y-4 bg-[var(--loom-subpanel)]/20">
+          <div class="text-xs font-mono uppercase tracking-wider text-[var(--loom-coral)] font-bold flex items-center gap-2">
+            <span>✖</span> What we deliberately avoid
+          </div>
+          <ul class="space-y-3.5 text-sm text-[var(--loom-muted)]">
+            <li class="flex items-start gap-2.5">
+              <span class="text-[var(--loom-coral)] mt-0.5 font-bold">✖</span>
+              <span><strong class="text-[var(--loom-text)] font-semibold">No proprietary agent runtime:</strong> Bring your own Claude Code, OpenAI Codex, or Gemini CLI. No vendor lock-in.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-[var(--loom-coral)] mt-0.5 font-bold">✖</span>
+              <span><strong class="text-[var(--loom-text)] font-semibold">No monthly SaaS seat tax:</strong> No hosted workspace fees, no credit tokens. 100% open source and self-contained.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-[var(--loom-coral)] mt-0.5 font-bold">✖</span>
+              <span><strong class="text-[var(--loom-text)] font-semibold">No silent auto-merges:</strong> Agents never push directly to main or merge unvetted PRs. Every change requires human review.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-[var(--loom-coral)] mt-0.5 font-bold">✖</span>
+              <span><strong class="text-[var(--loom-text)] font-semibold">No clobbering of local rules:</strong> Upstream prompt improvements never overwrite your repository's custom compliance invariants.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

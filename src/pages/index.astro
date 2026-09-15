@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import MetricStrip from '../components/MetricStrip.astro';
+import InteractiveShowcase from '../components/InteractiveShowcase.astro';
+import Capabilities from '../components/Capabilities.astro';
+import AntiFeatures from '../components/AntiFeatures.astro';
+import Tiers from '../components/Tiers.astro';
+import InstallCTA from '../components/InstallCTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="ActiveLoom — Reusable Engineering Workflows for Coding Agents"
+  description="Skills, adversarial PR review protocols, verifiable commit ledgers, and bounded issue autonomy for Claude Code, Codex, and Gemini. One upstream, many repos."
+>
+  <Nav />
+  <main class="grow">
+    <Hero />
+    <MetricStrip />
+    <InteractiveShowcase />
+    <Capabilities />
+    <AntiFeatures />
+    <Tiers />
+    <InstallCTA />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,16 @@
+# Build and dependencies
+node_modules/
+dist/
+.astro/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# OS / Editor
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/

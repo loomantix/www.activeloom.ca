@@ -1,0 +1,91 @@
+---
+---
+
+<section class="relative pt-16 pb-12 sm:pt-24 sm:pb-16 overflow-hidden border-b border-[var(--loom-border)]">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Eyebrow -->
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--loom-border)] bg-[var(--loom-panel)] text-xs font-mono mb-8 text-[var(--loom-muted)]">
+      <span class="w-2 h-2 rounded-full bg-[var(--loom-accent)] live-pulse"></span>
+      <span class="text-[var(--loom-text)] font-semibold">ActiveLoom</span>
+      <span class="opacity-50">/</span>
+      <span>reusable workflows for coding agents</span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.1] mb-6">
+      Give your agents discipline.<br />
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--loom-accent)] via-[var(--loom-cyan)] to-[var(--loom-text)]">
+        Prove every commit.
+      </span>
+    </h1>
+
+    <!-- Lede -->
+    <p class="text-lg sm:text-xl text-[var(--loom-muted)] max-w-3xl mx-auto mb-10 leading-relaxed font-sans">
+      Coding agents write code fast, but without guardrails they regress, hallucinate passing reviews, and burn tokens in loops. 
+      <strong class="text-[var(--loom-text)] font-semibold">ActiveLoom</strong> supplies battle-tested skills, PR-first adversarial review protocols, 
+      verifiable commit ledgers, and bounded issue autonomy for Claude Code, Codex, and Gemini — synced from one upstream to your entire repository fleet.
+    </p>
+
+    <!-- Interactive Command Bar -->
+    <div class="max-w-xl mx-auto mb-8">
+      <div class="flex items-center justify-between p-2 pl-4 rounded-lg border border-[var(--loom-border-active)] bg-[var(--loom-code)] font-mono text-sm shadow-xl group">
+        <div class="flex items-center gap-2 overflow-x-auto py-1">
+          <span class="text-[var(--loom-accent)] select-none font-bold">$</span>
+          <span id="hero-cmd-text" class="text-[var(--loom-text)] whitespace-nowrap">npx activeloom init --harness codex,claude,gemini</span>
+        </div>
+        <button
+          type="button"
+          id="hero-copy-btn"
+          class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded border border-[var(--loom-border)] bg-[var(--loom-panel)] hover:border-[var(--loom-accent)] hover:text-[var(--loom-accent)] text-[var(--loom-muted)] transition-all shrink-0 ml-3"
+          aria-label="Copy install command"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="hero-copy-label">copy</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Metadata Badges -->
+    <div class="flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs font-mono text-[var(--loom-muted)]">
+      <span class="flex items-center gap-1.5">
+        <span class="text-[var(--loom-accent)]">✔</span> Claude Code
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="text-[var(--loom-accent)]">✔</span> OpenAI Codex
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="text-[var(--loom-accent)]">✔</span> Google Antigravity / Gemini
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="text-[var(--loom-accent)]">✔</span> Node 18+ & Python 3.9+
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="text-[var(--loom-accent)]">✔</span> Apache 2.0
+      </span>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const copyBtn = document.getElementById('hero-copy-btn');
+    const cmdText = document.getElementById('hero-cmd-text');
+    const copyLabel = document.getElementById('hero-copy-label');
+    if (!copyBtn || !cmdText || !copyLabel) return;
+
+    copyBtn.addEventListener('click', () => {
+      const text = cmdText.textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const was = copyLabel.textContent;
+        copyLabel.textContent = 'copied!';
+        copyBtn.classList.add('border-[var(--loom-accent)]', 'text-[var(--loom-accent)]');
+        setTimeout(() => {
+          copyLabel.textContent = was;
+          copyBtn.classList.remove('border-[var(--loom-accent)]', 'text-[var(--loom-accent)]');
+        }, 1500);
+      });
+    });
+  })();
+</script>

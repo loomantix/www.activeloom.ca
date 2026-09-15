@@ -1,0 +1,373 @@
+---
+---
+
+<section id="showcase" class="py-16 sm:py-20 border-b border-[var(--loom-border)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+      <div>
+        <div class="text-xs font-mono uppercase tracking-widest text-[var(--loom-accent)] mb-1">Live Protocol Simulator</div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold font-display">The multi-agent workflow in action.</h2>
+      </div>
+      <p class="text-xs font-mono text-[var(--loom-muted)]">
+        Click any agent, workspace, or tab to inspect live protocol evidence ↗
+      </p>
+    </div>
+
+    <!-- The Mock TUI Frame -->
+    <div class="rounded-xl border border-[var(--loom-border-active)] bg-[var(--loom-code)] shadow-2xl overflow-hidden">
+      <!-- Window Titlebar -->
+      <div class="h-10 px-4 border-b border-[var(--loom-border)] bg-[var(--loom-panel)] flex items-center justify-between text-xs font-mono text-[var(--loom-muted)]">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+          <span class="ml-2 text-[var(--loom-text)] font-semibold">activeloom-session — 3 workspaces · 4 agents</span>
+        </div>
+        <div class="hidden sm:flex items-center gap-4">
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[var(--loom-accent)] live-pulse"></span> protocol: converged</span>
+          <span>sync: v2</span>
+        </div>
+      </div>
+
+      <!-- Main Layout: Sidebar + Terminal -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[540px]">
+        <!-- Sidebar (Spaces & Agents) -->
+        <aside class="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-[var(--loom-border)] bg-[var(--loom-panel)]/50 p-3 flex flex-col gap-5 text-xs font-mono">
+          <!-- Workspaces -->
+          <div>
+            <div class="text-[10px] font-bold uppercase tracking-wider text-[var(--loom-muted)] px-2 mb-2">Workspaces</div>
+            <div class="flex flex-col gap-1">
+              <button
+                type="button"
+                data-mock-space="critique"
+                class="mock-nav-btn w-full text-left px-2.5 py-2 rounded flex items-center gap-2.5 transition-all bg-[var(--loom-subpanel)] text-[var(--loom-text)] font-medium border border-[var(--loom-border-active)]"
+              >
+                <span class="w-2 h-2 rounded-full bg-[var(--loom-amber)]"></span>
+                <div class="truncate">
+                  <div class="font-bold">activescribe</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">PR #242 · staging</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                data-mock-space="loop"
+                class="mock-nav-btn w-full text-left px-2.5 py-2 rounded flex items-center gap-2.5 transition-all text-[var(--loom-muted)] hover:text-[var(--loom-text)] hover:bg-[var(--loom-subpanel)]/50 border border-transparent"
+              >
+                <span class="w-2 h-2 rounded-full bg-[var(--loom-cyan)]"></span>
+                <div class="truncate">
+                  <div class="font-bold">activebill</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">issue #1274 · worktree</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                data-mock-space="sync"
+                class="mock-nav-btn w-full text-left px-2.5 py-2 rounded flex items-center gap-2.5 transition-all text-[var(--loom-muted)] hover:text-[var(--loom-text)] hover:bg-[var(--loom-subpanel)]/50 border border-transparent"
+              >
+                <span class="w-2 h-2 rounded-full bg-[var(--loom-accent)]"></span>
+                <div class="truncate">
+                  <div class="font-bold">activeinfra</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">upstream sync · clean</div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Agents -->
+          <div>
+            <div class="text-[10px] font-bold uppercase tracking-wider text-[var(--loom-muted)] px-2 mb-2">Active Agents</div>
+            <div class="flex flex-col gap-1">
+              <button
+                type="button"
+                data-mock-agent="critique"
+                class="mock-agent-btn w-full text-left px-2.5 py-2 rounded flex items-center gap-2 transition-all bg-[var(--loom-subpanel)] text-[var(--loom-text)]"
+              >
+                <span class="text-[var(--loom-amber)]">●</span>
+                <div class="truncate">
+                  <div class="font-semibold">Codex Reviewer</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">critique deep · finding</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                data-mock-agent="ledger"
+                class="mock-agent-btn w-full text-left px-2.5 py-2 rounded flex items-center gap-2 transition-all text-[var(--loom-muted)] hover:text-[var(--loom-text)]"
+              >
+                <span class="text-[var(--loom-accent)]">◉</span>
+                <div class="truncate">
+                  <div class="font-semibold">Gemini / Agy</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">ledger verification</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                data-mock-agent="loop"
+                class="mock-agent-btn w-full text-left px-2.5 py-2 rounded flex items-center gap-2 transition-all text-[var(--loom-muted)] hover:text-[var(--loom-text)]"
+              >
+                <span class="text-[var(--loom-cyan)]">●</span>
+                <div class="truncate">
+                  <div class="font-semibold">agent-loop runner</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">autonomous queue</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                data-mock-agent="sync"
+                class="mock-agent-btn w-full text-left px-2.5 py-2 rounded flex items-center gap-2 transition-all text-[var(--loom-muted)] hover:text-[var(--loom-text)]"
+              >
+                <span class="text-[var(--loom-muted)]">○</span>
+                <div class="truncate">
+                  <div class="font-semibold">sync-engine v2</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">upstream scheduler</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Terminal Area -->
+        <main class="lg:col-span-9 flex flex-col justify-between bg-[var(--loom-code)]">
+          <!-- Terminal Tabs -->
+          <div class="flex items-center border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/30 text-xs font-mono overflow-x-auto">
+            <button
+              type="button"
+              data-mock-tab="critique"
+              class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-[var(--loom-accent)] bg-[var(--loom-code)] text-[var(--loom-text)] font-semibold flex items-center gap-2 whitespace-nowrap"
+            >
+              <span>1. critique (Codex)</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--loom-amber)]"></span>
+            </button>
+            <button
+              type="button"
+              data-mock-tab="ledger"
+              class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
+            >
+              <span>2. review-ledger.json</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--loom-accent)]"></span>
+            </button>
+            <button
+              type="button"
+              data-mock-tab="loop"
+              class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
+            >
+              <span>3. agent-loop (Autonomy)</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--loom-cyan)]"></span>
+            </button>
+            <button
+              type="button"
+              data-mock-tab="sync"
+              class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
+            >
+              <span>4. sync-v2 (Fleet)</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+            </button>
+          </div>
+
+          <!-- Terminal Content Panes -->
+          <div class="p-5 font-mono text-xs sm:text-[13px] leading-relaxed overflow-x-auto grow">
+            <!-- Pane 1: Critique -->
+            <div id="pane-critique" class="tab-pane block space-y-3">
+              <div class="text-[var(--loom-muted)]">
+                <span class="text-[var(--loom-cyan)] font-bold">Codex</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/activescribe-streaming-r2</span> &gt; <span class="text-[var(--loom-amber)]">feat/audio-stream</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[var(--loom-accent)] font-bold">❯</span>
+                <span class="text-[var(--loom-text)] font-semibold">activeloom critique deep --pr 242</span>
+              </div>
+              <div class="text-[var(--loom-muted)] pl-4 border-l border-[var(--loom-border)] space-y-1">
+                <div>[protocol] Draft PR #242 verified. Review tier resolved: <span class="text-[var(--loom-amber)] font-bold">DEEP</span> (Trigger 2: Audio mutation & encryption boundary)</div>
+                <div>[protocol] Preflight diff validation: 4 files changed, +142 lines, -18 lines.</div>
+                <div>[protocol] Executing adversarial pass across 5 deep review lanes...</div>
+              </div>
+              <div class="p-3 rounded bg-[var(--loom-panel)] border border-[var(--loom-coral)]/40 text-[var(--loom-coral)]">
+                <div class="font-bold flex items-center gap-2">
+                  <span>✖</span> DEFECT DETECTED: Unencrypted database update on encrypted column
+                </div>
+                <div class="text-xs text-[var(--loom-text)] mt-1">
+                  File: <code class="text-[var(--loom-cyan)]">apps/backend/src/transcription/stream.service.ts#L142</code>
+                </div>
+                <div class="text-xs text-[var(--loom-muted)] mt-1">
+                  Violation: Column `bx_raw_payload` updated directly without `e_id` encapsulation. Violates HIPAA/PHIPA encryption invariant.
+                </div>
+              </div>
+              <div class="space-y-1 text-[var(--loom-muted)]">
+                <div><span class="text-[var(--loom-accent)]">✔</span> Posted verified defect inline to PR #242 comment thread (commit: <code class="text-[var(--loom-text)]">4d2e1b</code>).</div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> Automated fix diff prepared using <code class="text-[var(--loom-text)]">safeEncryptedUpdate()</code> from shared package.</div>
+                <div class="flex items-center gap-2 text-[var(--loom-text)]">
+                  <span class="braille-spinner text-[var(--loom-accent)] font-bold">⠋</span>
+                  <span>Awaiting second-opinion verification from Gemini...</span>
+                  <span class="text-[var(--loom-muted)]">(42s elapsed)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 2: Ledger -->
+            <div id="pane-ledger" class="tab-pane hidden space-y-3">
+              <div class="text-[var(--loom-muted)] flex items-center justify-between">
+                <span>review-ledger.json &mdash; commit-pinned cryptographic audit record</span>
+                <span class="text-[var(--loom-accent)] font-semibold">VERIFIED</span>
+              </div>
+              <pre class="p-4 rounded bg-[var(--loom-panel)] border border-[var(--loom-border)] text-xs text-[var(--loom-text)] overflow-x-auto leading-relaxed">
+&#123;
+  <span class="text-[var(--loom-cyan)]">"$schema"</span>: <span class="text-[var(--loom-accent)]">"https://activeloom.ca/schemas/review-ledger-v1.json"</span>,
+  <span class="text-[var(--loom-cyan)]">"commitSha"</span>: <span class="text-[var(--loom-amber)]">"4d2e1b89ef01a23c7b89d2140f1a94e82b7c65d3"</span>,
+  <span class="text-[var(--loom-cyan)]">"prNumber"</span>: 242,
+  <span class="text-[var(--loom-cyan)]">"reviewTier"</span>: <span class="text-[var(--loom-amber)]">"deep"</span>,
+  <span class="text-[var(--loom-cyan)]">"convergenceState"</span>: <span class="text-[var(--loom-accent)]">"CONVERGED"</span>,
+  <span class="text-[var(--loom-cyan)]">"signatures"</span>: &#123;
+    <span class="text-[var(--loom-cyan)]">"codex-critique"</span>: &#123;
+      <span class="text-[var(--loom-cyan)]">"timestamp"</span>: <span class="text-[var(--loom-muted)]">"2026-09-14T22:15:30Z"</span>,
+      <span class="text-[var(--loom-cyan)]">"status"</span>: <span class="text-[var(--loom-accent)]">"APPROVED_AFTER_FIX"</span>,
+      <span class="text-[var(--loom-cyan)]">"findingsResolved"</span>: 1,
+      <span class="text-[var(--loom-cyan)]">"unresolvedBlockers"</span>: 0
+    &#125;,
+    <span class="text-[var(--loom-cyan)]">"gemini-second-opinion"</span>: &#123;
+      <span class="text-[var(--loom-cyan)]">"timestamp"</span>: <span class="text-[var(--loom-muted)]">"2026-09-14T22:18:12Z"</span>,
+      <span class="text-[var(--loom-cyan)]">"status"</span>: <span class="text-[var(--loom-accent)]">"APPROVED"</span>,
+      <span class="text-[var(--loom-cyan)]">"findingsResolved"</span>: 0,
+      <span class="text-[var(--loom-cyan)]">"unresolvedBlockers"</span>: 0
+    &#125;
+  &#125;,
+  <span class="text-[var(--loom-cyan)]">"invariantsVerified"</span>: [
+    <span class="text-[var(--loom-text)]">"encryption_eid_enforced"</span>,
+    <span class="text-[var(--loom-text)]">"zero_phi_telemetry"</span>,
+    <span class="text-[var(--loom-text)]">"strict_typescript_no_any"</span>
+  ]
+&#125;</pre>
+            </div>
+
+            <!-- Pane 3: Loop -->
+            <div id="pane-loop" class="tab-pane hidden space-y-3">
+              <div class="text-[var(--loom-muted)]">
+                <span class="text-[var(--loom-cyan)] font-bold">agent-loop</span> on <span class="text-[var(--loom-text)] font-semibold">~/wt/activebill-1274</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[var(--loom-accent)] font-bold">❯</span>
+                <span class="text-[var(--loom-text)] font-semibold">activeloom agent-loop run --issue 1274</span>
+              </div>
+              <div class="space-y-1 text-[var(--loom-muted)]">
+                <div>[queue] Issue #1274 allowlisted: <span class="text-[var(--loom-text)]">"Fix allocator floor calculation on tiered accounts"</span></div>
+                <div>[worktree] Provisioned isolated worktree: <code class="text-[var(--loom-cyan)]">~/wt/activebill-1274</code> from <code class="text-[var(--loom-text)]">origin/staging</code></div>
+                <div>[repro] Generated regression test: <code class="text-[var(--loom-text)]">tests/allocator-floor.spec.ts</code></div>
+                <div>[code] Modified <code class="text-[var(--loom-cyan)]">packages/core/allocator.ts</code> &mdash; complexity checked (24 logical lines)</div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> Test suite passed: 14 assertions clean in 840ms.</div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> Atomic conventional commit created: <code class="text-[var(--loom-text)]">fix(allocator): clamp floor value to zero</code></div>
+                <div><span class="text-[var(--loom-accent)]">✔</span> Pushed draft PR #412. Local /critique hook completed with 0 blockers.</div>
+              </div>
+              <div class="p-2.5 rounded bg-[var(--loom-accent-glow)] border border-[var(--loom-accent)]/30 text-[var(--loom-accent)] font-bold flex items-center gap-2">
+                <span>✔</span> Issue #1274 resolved autonomously. Ready for maintainer merge.
+              </div>
+            </div>
+
+            <!-- Pane 4: Sync -->
+            <div id="pane-sync" class="tab-pane hidden space-y-3">
+              <div class="text-[var(--loom-muted)]">
+                <span class="text-[var(--loom-cyan)] font-bold">sync-engine v2</span> &mdash; Fleet propagation
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[var(--loom-accent)] font-bold">❯</span>
+                <span class="text-[var(--loom-text)] font-semibold">python3 scripts/sync-engine.py --consumer-dir . --config .activeloom-config.yml</span>
+              </div>
+              <div class="space-y-1 text-[var(--loom-muted)]">
+                <div>[sync] Source: <code class="text-[var(--loom-cyan)]">loomantix/activeloom@sync-v2</code> (commit: <code class="text-[var(--loom-text)]">986a66b</code>)</div>
+                <div>[sync] Updating upstream-managed skills and review workflows:</div>
+                <div class="pl-4 text-[var(--loom-text)]">
+                  <div>→ <code class="text-[var(--loom-cyan)]">.agents/skills/critique/SKILL.md</code> (updated to v2.4.0)</div>
+                  <div>→ <code class="text-[var(--loom-cyan)]">.codex/REVIEW_WORKFLOW.md</code> (synced)</div>
+                  <div>→ <code class="text-[var(--loom-cyan)]">.github/copilot-instructions.md</code> (re-rendered with project variables)</div>
+                </div>
+                <div class="pt-2 text-[var(--loom-accent)] font-semibold">
+                  ★ Consumer-owned exceptions preserved without modification:
+                </div>
+                <div class="pl-4 text-[var(--loom-muted)]">
+                  <div>✔ <code class="text-[var(--loom-text)]">.review/addendum.local.md</code> (4 local security invariants protected)</div>
+                  <div>✔ <code class="text-[var(--loom-text)]">.codex/skills/agent-loop/agent-loop.config</code> (local queue config preserved)</div>
+                </div>
+              </div>
+              <div class="text-[var(--loom-text)]">
+                ✔ Created clean propagation PR with signed commits. Zero local drift.
+              </div>
+            </div>
+          </div>
+
+          <!-- Terminal Bottom Status Bar -->
+          <div class="h-8 px-4 border-t border-[var(--loom-border)] bg-[var(--loom-panel)]/80 flex items-center justify-between text-[11px] font-mono text-[var(--loom-muted)]">
+            <div class="flex items-center gap-2">
+              <span class="text-[var(--loom-accent)] font-bold">›</span>
+              <span class="terminal-cursor"></span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span>ctx: <span class="text-[var(--loom-accent)] font-semibold">4%</span> (38k / 1M)</span>
+              <span class="hidden sm:inline">esc to interrupt</span>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const tabs = document.querySelectorAll('[data-mock-tab]');
+    const panes = document.querySelectorAll('.tab-pane');
+    const spaceBtns = document.querySelectorAll('[data-mock-space]');
+    const agentBtns = document.querySelectorAll('[data-mock-agent]');
+
+    function selectTab(target) {
+      tabs.forEach((tab) => {
+        const isMatch = tab.getAttribute('data-mock-tab') === target;
+        if (isMatch) {
+          tab.classList.add('border-b-[var(--loom-accent)]', 'text-[var(--loom-text)]', 'font-semibold', 'bg-[var(--loom-code)]');
+          tab.classList.remove('border-b-transparent', 'text-[var(--loom-muted)]');
+        } else {
+          tab.classList.remove('border-b-[var(--loom-accent)]', 'text-[var(--loom-text)]', 'font-semibold', 'bg-[var(--loom-code)]');
+          tab.classList.add('border-b-transparent', 'text-[var(--loom-muted)]');
+        }
+      });
+
+      panes.forEach((pane) => {
+        if (pane.id === 'pane-' + target) {
+          pane.classList.remove('hidden');
+          pane.classList.add('block');
+        } else {
+          pane.classList.add('hidden');
+          pane.classList.remove('block');
+        }
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        selectTab(tab.getAttribute('data-mock-tab'));
+      });
+    });
+
+    spaceBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        selectTab(btn.getAttribute('data-mock-space'));
+      });
+    });
+
+    agentBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        selectTab(btn.getAttribute('data-mock-agent'));
+      });
+    });
+
+    // Braille spinner cycling
+    const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % frames.length;
+      document.querySelectorAll('.braille-spinner').forEach((el) => {
+        el.textContent = frames[idx];
+      });
+    }, 80);
+  })();
+</script>

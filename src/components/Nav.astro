@@ -1,0 +1,86 @@
+---
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-[var(--loom-border)] bg-[var(--loom-ground)]/90 backdrop-blur">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Brand -->
+    <a href="/" class="flex items-center gap-2.5 text-lg font-bold font-mono tracking-tight group">
+      <span class="text-[var(--loom-accent)] group-hover:scale-110 transition-transform">◱</span>
+      <span>active<span class="text-[var(--loom-muted)] font-normal">|</span>loom</span>
+    </a>
+
+    <!-- Nav Links -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[var(--loom-muted)]">
+      <a href="#showcase" class="hover:text-[var(--loom-text)] transition-colors">Showcase</a>
+      <a href="#capabilities" class="hover:text-[var(--loom-text)] transition-colors">Capabilities</a>
+      <a href="#boundaries" class="hover:text-[var(--loom-text)] transition-colors">Boundaries</a>
+      <a href="#tiers" class="hover:text-[var(--loom-text)] transition-colors">Adoption Tiers</a>
+      <a href="https://github.com/loomantix/activeloom" target="_blank" rel="noreferrer" class="hover:text-[var(--loom-text)] transition-colors flex items-center gap-1.5">
+        GitHub
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+    </nav>
+
+    <!-- Controls & CTA -->
+    <div class="flex items-center gap-3">
+      <!-- Ground Mode Toggle (ink / paper) -->
+      <div class="flex items-center p-1 rounded-md border border-[var(--loom-border)] bg-[var(--loom-panel)] text-xs font-mono">
+        <button
+          type="button"
+          data-ground-btn="ink"
+          class="px-2.5 py-1 rounded transition-colors text-[var(--loom-text)] font-semibold"
+          aria-label="Terminal dark mode"
+        >
+          ink
+        </button>
+        <button
+          type="button"
+          data-ground-btn="paper"
+          class="px-2.5 py-1 rounded transition-colors text-[var(--loom-muted)] hover:text-[var(--loom-text)]"
+          aria-label="Editorial light mode"
+        >
+          paper
+        </button>
+      </div>
+
+      <!-- Quick Install Button -->
+      <a
+        href="#install"
+        class="hidden sm:inline-flex items-center justify-center px-4 py-1.5 text-xs font-mono font-semibold rounded-md border border-[var(--loom-border-active)] bg-[var(--loom-panel)] hover:border-[var(--loom-accent)] hover:text-[var(--loom-accent)] transition-all shadow-sm"
+      >
+        Install CLI
+      </a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const buttons = document.querySelectorAll('[data-ground-btn]');
+    function update(mode) {
+      window.loomGround.apply(mode);
+      buttons.forEach((btn) => {
+        const active = btn.getAttribute('data-ground-btn') === mode;
+        if (active) {
+          btn.classList.add('bg-[var(--loom-subpanel)]', 'text-[var(--loom-text)]', 'font-semibold');
+          btn.classList.remove('text-[var(--loom-muted)]');
+        } else {
+          btn.classList.remove('bg-[var(--loom-subpanel)]', 'text-[var(--loom-text)]', 'font-semibold');
+          btn.classList.add('text-[var(--loom-muted)]');
+        }
+      });
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-ground-btn');
+        window.loomGround.save(mode);
+        update(mode);
+      });
+    });
+
+    update(window.loomGround.read());
+  })();
+</script>

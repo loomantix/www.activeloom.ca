@@ -1,0 +1,74 @@
+---
+---
+
+<section id="tiers" class="py-16 sm:py-24 border-b border-[var(--loom-border)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="text-xs font-mono uppercase tracking-widest text-[var(--loom-accent)] mb-2">Adoption Model</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold font-display">From personal trial to fleet sync.</h2>
+      <p class="text-base text-[var(--loom-muted)] mt-3">
+        Adopt gradually. Start by running a single skill in your personal shell, then scale up to scheduled multi-repo propagation.
+      </p>
+    </div>
+
+    <!-- Tiers Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Tier 0 -->
+      <div class="p-6 rounded-xl border border-[var(--loom-border)] bg-[var(--loom-panel)] flex flex-col justify-between hover:border-[var(--loom-border-active)] transition-all">
+        <div>
+          <div class="text-xs font-mono text-[var(--loom-muted)] uppercase tracking-wider mb-2">Tier 0</div>
+          <h3 class="text-lg font-bold font-display mb-2">Personal Evaluation</h3>
+          <p class="text-xs text-[var(--loom-muted)] leading-relaxed mb-4">
+            Try a single skill in your home directory without touching any shared repository files or configurations.
+          </p>
+        </div>
+        <div class="p-2.5 rounded bg-[var(--loom-code)] border border-[var(--loom-border)] font-mono text-[11px] text-[var(--loom-accent)] truncate">
+          $ activeloom add critique
+        </div>
+      </div>
+
+      <!-- Tier 1 -->
+      <div class="p-6 rounded-xl border border-[var(--loom-border)] bg-[var(--loom-panel)] flex flex-col justify-between hover:border-[var(--loom-border-active)] transition-all">
+        <div>
+          <div class="text-xs font-mono text-[var(--loom-cyan)] uppercase tracking-wider mb-2">Tier 1</div>
+          <h3 class="text-lg font-bold font-display mb-2">Repository Setup</h3>
+          <p class="text-xs text-[var(--loom-muted)] leading-relaxed mb-4">
+            Scaffold harness directories (<code class="text-[var(--loom-text)]">.codex/</code>, <code class="text-[var(--loom-text)]">.claude/</code>) and shared project instructions for your team.
+          </p>
+        </div>
+        <div class="p-2.5 rounded bg-[var(--loom-code)] border border-[var(--loom-border)] font-mono text-[11px] text-[var(--loom-cyan)] truncate">
+          $ activeloom init
+        </div>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="p-6 rounded-xl border border-[var(--loom-border)] bg-[var(--loom-panel)] flex flex-col justify-between hover:border-[var(--loom-border-active)] transition-all relative">
+        <div class="absolute -top-3 right-4 px-2 py-0.5 rounded bg-[var(--loom-accent)] text-black text-[10px] font-mono font-bold uppercase">Recommended</div>
+        <div>
+          <div class="text-xs font-mono text-[var(--loom-accent)] uppercase tracking-wider mb-2">Tier 2</div>
+          <h3 class="text-lg font-bold font-display mb-2">Scheduled Sync</h3>
+          <p class="text-xs text-[var(--loom-muted)] leading-relaxed mb-4">
+            Automated GitHub Actions workflow proposing upstream skill improvements via pull requests using built-in <code class="text-[var(--loom-text)]">GITHUB_TOKEN</code>.
+          </p>
+        </div>
+        <div class="p-2.5 rounded bg-[var(--loom-code)] border border-[var(--loom-border)] font-mono text-[11px] text-[var(--loom-accent)] truncate">
+          $ activeloom init --sync
+        </div>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="p-6 rounded-xl border border-[var(--loom-border)] bg-[var(--loom-panel)] flex flex-col justify-between hover:border-[var(--loom-border-active)] transition-all">
+        <div>
+          <div class="text-xs font-mono text-[var(--loom-amber)] uppercase tracking-wider mb-2">Tier 3</div>
+          <h3 class="text-lg font-bold font-display mb-2">App-Backed Fleet</h3>
+          <p class="text-xs text-[var(--loom-muted)] leading-relaxed mb-4">
+            Enterprise multi-repo orchestration. Scheduled updates with cryptographic GitHub App signatures and least-privilege tokens.
+          </p>
+        </div>
+        <div class="p-2.5 rounded bg-[var(--loom-code)] border border-[var(--loom-border)] font-mono text-[11px] text-[var(--loom-amber)] truncate">
+          $ activeloom init --sync --app
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

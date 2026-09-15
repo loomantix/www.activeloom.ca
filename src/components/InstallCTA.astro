@@ -1,0 +1,112 @@
+---
+---
+
+<section id="install" class="py-16 sm:py-24 border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/40">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--loom-border)] bg-[var(--loom-panel)] text-xs font-mono mb-6 text-[var(--loom-muted)]">
+      <span>Ready to evaluate?</span>
+    </div>
+
+    <h2 class="text-3xl sm:text-5xl font-extrabold font-display tracking-tight mb-4">
+      Give your agents real discipline today.
+    </h2>
+    <p class="text-base sm:text-lg text-[var(--loom-muted)] max-w-2xl mx-auto mb-10">
+      One command to initialize your repository. Nothing about your developer workflow changes, except now your AI agents work with verifiable proof.
+    </p>
+
+    <!-- Terminal Command Box with Selector -->
+    <div class="max-w-2xl mx-auto rounded-xl border border-[var(--loom-border-active)] bg-[var(--loom-code)] overflow-hidden shadow-2xl text-left font-mono text-xs sm:text-sm">
+      <div class="flex items-center border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/80 px-2 overflow-x-auto">
+        <button
+          type="button"
+          data-install-mode="init"
+          class="install-tab-btn px-4 py-2.5 border-b-2 border-[var(--loom-accent)] text-[var(--loom-text)] font-semibold whitespace-nowrap"
+        >
+          1. Initialize Repo
+        </button>
+        <button
+          type="button"
+          data-install-mode="add"
+          class="install-tab-btn px-4 py-2.5 border-b-2 border-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] whitespace-nowrap"
+        >
+          2. Try Single Skill
+        </button>
+        <button
+          type="button"
+          data-install-mode="source"
+          class="install-tab-btn px-4 py-2.5 border-b-2 border-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] whitespace-nowrap"
+        >
+          3. Source Checkout
+        </button>
+      </div>
+
+      <div class="p-5 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2 overflow-x-auto">
+          <span class="text-[var(--loom-accent)] font-bold select-none">$</span>
+          <span id="install-cmd-display" class="text-[var(--loom-text)] whitespace-nowrap">npx activeloom init --harness codex,claude,gemini</span>
+        </div>
+        <button
+          type="button"
+          id="install-copy-btn"
+          class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded border border-[var(--loom-border)] bg-[var(--loom-panel)] hover:border-[var(--loom-accent)] hover:text-[var(--loom-accent)] text-[var(--loom-muted)] transition-all shrink-0"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="install-copy-label">copy</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-6 text-xs font-mono text-[var(--loom-muted)]">
+      Requires Node 18.17+ and Python 3.9+ · Zero runtime telemetry sent to third parties
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const COMMANDS = {
+      init: 'npx activeloom init --harness codex,claude,gemini',
+      add: 'npx activeloom add diagnosing-bugs --harness codex',
+      source: 'git clone https://github.com/loomantix/activeloom.git && cd activeloom',
+    };
+
+    const tabs = document.querySelectorAll('[data-install-mode]');
+    const display = document.getElementById('install-cmd-display');
+    const copyBtn = document.getElementById('install-copy-btn');
+    const copyLabel = document.getElementById('install-copy-label');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const mode = tab.getAttribute('data-install-mode');
+        display.textContent = COMMANDS[mode];
+
+        tabs.forEach((t) => {
+          if (t === tab) {
+            t.classList.add('border-[var(--loom-accent)]', 'text-[var(--loom-text)]', 'font-semibold');
+            t.classList.remove('border-transparent', 'text-[var(--loom-muted)]');
+          } else {
+            t.classList.remove('border-[var(--loom-accent)]', 'text-[var(--loom-text)]', 'font-semibold');
+            t.classList.add('border-transparent', 'text-[var(--loom-muted)]');
+          }
+        });
+      });
+    });
+
+    if (copyBtn && display && copyLabel) {
+      copyBtn.addEventListener('click', () => {
+        const text = display.textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+          const was = copyLabel.textContent;
+          copyLabel.textContent = 'copied!';
+          copyBtn.classList.add('border-[var(--loom-accent)]', 'text-[var(--loom-accent)]');
+          setTimeout(() => {
+            copyLabel.textContent = was;
+            copyBtn.classList.remove('border-[var(--loom-accent)]', 'text-[var(--loom-accent)]');
+          }, 1500);
+        });
+      });
+    }
+  })();
+</script>

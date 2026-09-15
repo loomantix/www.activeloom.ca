@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Default: Ink (Dark Terminal Mode) */
+  --loom-ground: #0d0f14;
+  --loom-panel: #13161f;
+  --loom-subpanel: #1a1e2b;
+  --loom-border: #232838;
+  --loom-border-active: #3b4259;
+  --loom-text: #e2e8f0;
+  --loom-muted: #8492a6;
+  --loom-accent: #10b981;
+  --loom-accent-glow: rgba(16, 185, 129, 0.15);
+  --loom-cyan: #06b6d4;
+  --loom-amber: #f59e0b;
+  --loom-coral: #f43f5e;
+  --loom-code: #090b0e;
+  --loom-grid: rgba(255, 255, 255, 0.03);
+}
+
+[data-mode="paper"] {
+  /* Paper (Solarized Editorial Light Mode) */
+  --loom-ground: #faf8f5;
+  --loom-panel: #f3efe8;
+  --loom-subpanel: #e8e2d7;
+  --loom-border: #dcd4c5;
+  --loom-border-active: #b5a995;
+  --loom-text: #1a202c;
+  --loom-muted: #64748b;
+  --loom-accent: #059669;
+  --loom-accent-glow: rgba(5, 150, 105, 0.12);
+  --loom-cyan: #0284c7;
+  --loom-amber: #d97706;
+  --loom-coral: #e11d48;
+  --loom-code: #eae4d8;
+  --loom-grid: rgba(0, 0, 0, 0.03);
+}
+
+body {
+  background-color: var(--loom-ground);
+  color: var(--loom-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: 
+    linear-gradient(to right, var(--loom-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--loom-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Monospace text */
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--loom-ground);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--loom-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--loom-border-active);
+}
+
+/* Blinking terminal cursor */
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: var(--loom-accent);
+  vertical-align: middle;
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Pulse animation for live status */
+.live-pulse {
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

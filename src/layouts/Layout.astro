@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'ActiveLoom: Reusable Engineering Workflows for Coding Agents',
+  description = 'Skills, adversarial PR review protocols, verifiable commit ledgers, and bounded issue loops for Claude Code, Codex, and Gemini. One upstream, many repos.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://www.activeloom.ca');
+---
+
+<!doctype html>
+<html lang="en" data-mode="ink">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="ActiveLoom" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Theme / Ground Script -->
+    <script is:inline>
+      window.loomGround = {
+        read: function () {
+          try {
+            return localStorage.getItem('activeloom-theme') === 'paper' ? 'paper' : 'ink';
+          } catch (e) {
+            return 'ink';
+          }
+        },
+        apply: function (mode) {
+          document.documentElement.setAttribute('data-mode', mode);
+          return mode;
+        },
+        save: function (mode) {
+          try {
+            localStorage.setItem('activeloom-theme', mode);
+          } catch (e) {}
+        },
+      };
+      window.loomGround.apply(window.loomGround.read());
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col text-[var(--loom-text)] bg-[var(--loom-ground)] selection:bg-[var(--loom-accent)] selection:text-black">
+    <slot />
+  </body>
+</html>
