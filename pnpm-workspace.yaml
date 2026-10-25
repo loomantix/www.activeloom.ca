@@ -1,0 +1,5 @@
+overrides:
+  # GHSA-g7r4-m6w7-qqqr: development-server arbitrary file read.
+  esbuild@<0.28.1: ^0.28.2
+  # GHSA-w9m9-85wc-3x92 and GHSA-rj75-hqrm-r3gf: selector-parser denial of service.
+  postcss-selector-parser@<7.1.6: ^7.1.7
