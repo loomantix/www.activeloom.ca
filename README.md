@@ -6,7 +6,7 @@ Source for **[activeloom.dev](https://activeloom.dev)**, the website for [Active
 
 ## Stack
 
-- **Framework:** Astro 5 (static output) with Tailwind CSS 3
+- **Framework:** Astro 7 (static output) with Tailwind CSS 3
 - **Edge:** Cloudflare Pages. `functions/_middleware.ts` handles the canonical-host 301s, the `/agent` shortcut, and plain-text content negotiation for `curl` on `/`.
 - **Headers:** `public/_headers` (CSP and security headers; `*.pages.dev` is `noindex`)
 - **Agent-facing content:** `public/llms.txt`, `public/llms-full.txt`, `public/agent-guide.md`

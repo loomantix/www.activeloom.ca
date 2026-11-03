@@ -24,7 +24,7 @@
           </div>
           <h3 class="text-xl font-bold font-display mb-2">Not chat prompts. Operational skills.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            ActiveLoom skills encode strict operational procedures with validation checklists and deterministic outputs. From pre-code requirements grilling (<code class="text-[var(--loom-text)]">grill</code>) and deep troubleshooting (<code class="text-[var(--loom-text)]">diagnosing-bugs</code>) to task packets.
+            ActiveLoom skills encode strict operational procedures with validation checklists and deterministic outputs. From product and design interviews (<code class="text-[var(--loom-text)]">product-grill</code>, <code class="text-[var(--loom-text)]">grill</code>) and deep troubleshooting (<code class="text-[var(--loom-text)]">diagnosing-bugs</code>) to agent-ready backlogs (<code class="text-[var(--loom-text)]">backlog-refinement</code>) and pre-merge red teams (<code class="text-[var(--loom-text)]">red-team</code>).
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono text-[var(--loom-muted)] space-y-1.5">
@@ -116,7 +116,7 @@
           </div>
           <h3 class="text-xl font-bold font-display mb-2">Autonomous queues with guardrails.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            Let agents work your GitHub backlog safely with <code class="text-[var(--loom-text)]">agent-loop</code>. Strict issue allowlists, one isolated Git worktree per issue (<code class="text-[var(--loom-cyan)]">/tmp/agent-loop-worktrees</code> by default), test-driven iteration, and automatic bail-outs when blocked.
+            Let agents work your GitHub backlog safely with <code class="text-[var(--loom-text)]">agent-loop</code>. Strict issue allowlists, one linked Git worktree and draft PR per issue (<code class="text-[var(--loom-cyan)]">agent-loop/issue-&lt;N&gt;-&lt;run&gt;</code>), bounded local review rounds, fresh-base validation, and automatic bail-outs when blocked.
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono space-y-1.5">
@@ -164,7 +164,7 @@
       'npx activeloom detect',
       'npx activeloom add critique --harness claude',
       'pnpm test -- tests/allocator.spec.ts',
-      'git worktree add /tmp/agent-loop-worktrees/issue-88',
+      'npx activeloom add hreview horch --harness claude',
       'git push -u origin fix/allocator-floor',
     ];
 

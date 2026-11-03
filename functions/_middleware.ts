@@ -21,6 +21,14 @@ const CLI_TERMINAL_OUTPUT = `
   • \x1b[33mcritique\x1b[0m         PR-first adversarial review. Findings posted inline before edit.
   • \x1b[33magent-loop\x1b[0m       Bounded autonomous issue queue execution in isolated worktrees
 
+\x1b[1mHerd Orchestration (herdr):\x1b[0m
+  • \x1b[33mhorch\x1b[0m            Drive a whole workspace; ship converged work to the integration branch
+  • \x1b[33mhreview\x1b[0m          Review chain on a PR, one engine per visible pane, until it converges
+  • \x1b[33mhgrill\x1b[0m           Grill an issue across engines; post assumptions for your sign-off
+  • \x1b[33mhloop\x1b[0m            Batch of agent-ready issues: build, review, ship through horch's gate
+  • \x1b[33mhred-team\x1b[0m        Red-team a reviewed PR; fix blockers, file the rest as issues
+  • \x1b[33mhpromote\x1b[0m         Run the promotion recipe in visible panes; the merge stays yours
+
 \x1b[1mAI Agent Resources:\x1b[0m
   Documentation Index: \x1b[4mhttps://activeloom.dev/llms.txt\x1b[0m
   Agent Entry Guide:   \x1b[4mhttps://activeloom.dev/agent-guide.md\x1b[0m
