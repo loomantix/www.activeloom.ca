@@ -6,10 +6,14 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
       <div>
         <div class="text-xs font-mono uppercase tracking-widest text-[var(--loom-accent)] mb-1">Live Protocol Simulator</div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold font-display">A herd workspace in action.</h2>
+        <h2 class="text-2xl sm:text-3xl font-extrabold font-display">What a herd session looks like.</h2>
+        <p class="text-sm text-[var(--loom-muted)] mt-2 max-w-2xl">
+          A simulated example. One driving session (<code class="text-[var(--loom-text)]">horch</code>) runs reviews, interviews, and builds in herdr panes.
+          Every pass is an ordinary ActiveLoom review, recorded in the PR ledger.
+        </p>
       </div>
       <p class="text-xs font-mono text-[var(--loom-muted)]">
-        Click any tab or agent to inspect what each pane is doing ↗
+        Click a tab or pane to see what it is doing ↗
       </p>
     </div>
 
@@ -32,7 +36,7 @@
       <!-- Main Layout: Sidebar + Terminal -->
       <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[540px]">
         <!-- Sidebar (Spaces & Agents) -->
-        <aside class="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-[var(--loom-border)] bg-[var(--loom-panel)]/50 p-3 flex flex-col gap-5 text-xs font-mono">
+        <aside class="hidden lg:flex lg:col-span-3 lg:border-r border-[var(--loom-border)] bg-[var(--loom-panel)]/50 p-3 flex-col gap-5 text-xs font-mono">
           <!-- Workspaces -->
           <div>
             <div class="text-[10px] font-bold uppercase tracking-wider text-[var(--loom-muted)] px-2 mb-2">horch tabs</div>
@@ -99,7 +103,7 @@
                 <span class="text-[var(--loom-accent)]">◉</span>
                 <div class="truncate">
                   <div class="font-semibold">Gemini / Agy</div>
-                  <div class="text-[10px] text-[var(--loom-muted)]">ledger verification</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">attesting the head · ledger</div>
                 </div>
               </button>
 
@@ -111,19 +115,7 @@
                 <span class="text-[var(--loom-cyan)]">●</span>
                 <div class="truncate">
                   <div class="font-semibold">Claude · horch</div>
-                  <div class="text-[10px] text-[var(--loom-muted)]">driving session</div>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                data-mock-agent="sync"
-                class="mock-agent-btn w-full text-left px-2.5 py-2 rounded flex items-center gap-2 transition-all text-[var(--loom-muted)] hover:text-[var(--loom-text)]"
-              >
-                <span class="text-[var(--loom-muted)]">○</span>
-                <div class="truncate">
-                  <div class="font-semibold">sync-engine v2</div>
-                  <div class="text-[10px] text-[var(--loom-muted)]">upstream scheduler</div>
+                  <div class="text-[10px] text-[var(--loom-muted)]">driving the hloop batch</div>
                 </div>
               </button>
             </div>
@@ -131,7 +123,7 @@
         </aside>
 
         <!-- Main Terminal Area -->
-        <main class="lg:col-span-9 flex flex-col justify-between bg-[var(--loom-code)]">
+        <div class="lg:col-span-9 flex flex-col justify-between bg-[var(--loom-code)]">
           <!-- Terminal Tabs -->
           <div role="tablist" aria-label="herd workspace tabs" class="flex items-center border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/30 text-xs font-mono overflow-x-auto">
             <button
@@ -151,6 +143,7 @@
               role="tab"
               id="tab-ledger"
               aria-selected="false"
+              tabindex="-1"
               aria-controls="pane-ledger"
               data-mock-tab="ledger"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
@@ -163,6 +156,7 @@
               role="tab"
               id="tab-grill"
               aria-selected="false"
+              tabindex="-1"
               aria-controls="pane-grill"
               data-mock-tab="grill"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
@@ -175,6 +169,7 @@
               role="tab"
               id="tab-loop"
               aria-selected="false"
+              tabindex="-1"
               aria-controls="pane-loop"
               data-mock-tab="loop"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
@@ -187,11 +182,12 @@
               role="tab"
               id="tab-sync"
               aria-selected="false"
+              tabindex="-1"
               aria-controls="pane-sync"
               data-mock-tab="sync"
               class="tab-btn px-4 py-2.5 border-r border-[var(--loom-border)] border-b-2 border-b-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] flex items-center gap-2 whitespace-nowrap"
             >
-              <span>5. sync-v2 (Fleet)</span>
+              <span>Separately: sync PR</span>
               <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
             </button>
           </div>
@@ -235,7 +231,7 @@
             </div>
 
             <!-- Pane 2: Ledger -->
-            <div id="pane-ledger" role="tabpanel" aria-labelledby="tab-ledger" class="tab-pane hidden space-y-3">
+            <div id="pane-ledger" role="tabpanel" aria-labelledby="tab-ledger" class="tab-pane hidden space-y-3" hidden>
               <div class="text-[var(--loom-muted)] flex items-center justify-between">
                 <span>PR #57 ledger &mdash; review evidence pinned to the head commit</span>
                 <span class="text-[var(--loom-accent)] font-semibold">CONVERGED</span>
@@ -254,7 +250,7 @@
             </div>
 
             <!-- Pane 3: hgrill -->
-            <div id="pane-grill" role="tabpanel" aria-labelledby="tab-grill" class="tab-pane hidden space-y-3">
+            <div id="pane-grill" role="tabpanel" aria-labelledby="tab-grill" class="tab-pane hidden space-y-3" hidden>
               <div class="text-[var(--loom-muted)]">
                 <span class="text-[var(--loom-cyan)] font-bold">hgrill</span> on <span class="text-[var(--loom-text)] font-semibold">issue #91</span> &gt; <span class="text-[var(--loom-text)]">"Per-tenant rate limits"</span>
               </div>
@@ -275,7 +271,7 @@
             </div>
 
             <!-- Pane 4: hloop -->
-            <div id="pane-loop" role="tabpanel" aria-labelledby="tab-loop" class="tab-pane hidden space-y-3">
+            <div id="pane-loop" role="tabpanel" aria-labelledby="tab-loop" class="tab-pane hidden space-y-3" hidden>
               <div class="text-[var(--loom-muted)]">
                 <span class="text-[var(--loom-cyan)] font-bold">hloop</span> under <span class="text-[var(--loom-text)] font-semibold">horch</span> &middot; integration branch <code class="text-[var(--loom-amber)]">staging</code>
               </div>
@@ -298,9 +294,9 @@
             </div>
 
             <!-- Pane 4: Sync -->
-            <div id="pane-sync" role="tabpanel" aria-labelledby="tab-sync" class="tab-pane hidden space-y-3">
+            <div id="pane-sync" role="tabpanel" aria-labelledby="tab-sync" class="tab-pane hidden space-y-3" hidden>
               <div class="text-[var(--loom-muted)]">
-                <span class="text-[var(--loom-cyan)] font-bold">sync-engine v2</span> &mdash; Fleet propagation
+                <span class="text-[var(--loom-cyan)] font-bold">Scheduled sync</span> &mdash; runs in GitHub Actions, not in herdr
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[var(--loom-accent)] font-bold">❯</span>
@@ -339,7 +335,7 @@
               <span class="hidden sm:inline">esc to interrupt</span>
             </div>
           </div>
-        </main>
+        </div>
       </div>
     </div>
   </div>
@@ -356,6 +352,7 @@
       tabs.forEach((tab) => {
         const isMatch = tab.getAttribute('data-mock-tab') === target;
         tab.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+        tab.setAttribute('tabindex', isMatch ? '0' : '-1');
         if (isMatch) {
           tab.classList.add('border-b-[var(--loom-accent)]', 'text-[var(--loom-text)]', 'font-semibold', 'bg-[var(--loom-code)]');
           tab.classList.remove('border-b-transparent', 'text-[var(--loom-muted)]');
@@ -366,7 +363,9 @@
       });
 
       panes.forEach((pane) => {
-        if (pane.id === 'pane-' + target) {
+        const show = pane.id === 'pane-' + target;
+        pane.hidden = !show;
+        if (show) {
           pane.classList.remove('hidden');
           pane.classList.add('block');
         } else {
@@ -376,9 +375,21 @@
       });
     }
 
-    tabs.forEach((tab) => {
+    const tabList = Array.from(tabs);
+    tabList.forEach((tab, i) => {
       tab.addEventListener('click', () => {
         selectTab(tab.getAttribute('data-mock-tab'));
+      });
+      tab.addEventListener('keydown', (e) => {
+        let next = null;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabList.length;
+        else if (e.key === 'ArrowLeft') next = (i - 1 + tabList.length) % tabList.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabList.length - 1;
+        if (next === null) return;
+        e.preventDefault();
+        selectTab(tabList[next].getAttribute('data-mock-tab'));
+        tabList[next].focus();
       });
     });
 

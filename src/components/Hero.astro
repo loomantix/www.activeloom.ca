@@ -21,10 +21,10 @@
 
     <!-- Lede -->
     <p class="text-lg sm:text-xl text-[var(--loom-muted)] max-w-3xl mx-auto mb-10 leading-relaxed font-sans">
-      Coding agents write code fast, but without guardrails they regress, hallucinate passing reviews, and burn tokens in loops. 
-      <strong class="text-[var(--loom-text)] font-semibold">ActiveLoom</strong> supplies battle-tested skills, PR-first adversarial review protocols,
-      commit-pinned review ledgers, bounded issue autonomy, and herd orchestration that runs review chains, grills, builds, and promotions in panes you can watch,
-      for Claude Code, Codex, and Gemini — synced from one upstream to your entire repository fleet.
+      Coding agents write code fast, but without guardrails they regress, wave through their own reviews, and loop.
+      <strong class="text-[var(--loom-text)] font-semibold">ActiveLoom</strong> is an open-source set of skills and review protocols for Claude Code, Codex, and Gemini:
+      independent models review each draft PR, findings are posted before fixes, and the evidence is tied to the exact commit.
+      Try one skill, run whole review chains in panes you can watch, or sync the set across every repository.
     </p>
 
     <!-- Interactive Command Bar -->
@@ -32,7 +32,7 @@
       <div class="flex items-center justify-between p-2 pl-4 rounded-lg border border-[var(--loom-border-active)] bg-[var(--loom-code)] font-mono text-sm shadow-xl group">
         <div class="flex items-center gap-2 overflow-x-auto py-1">
           <span class="text-[var(--loom-accent)] select-none font-bold">$</span>
-          <span id="hero-cmd-text" class="text-[var(--loom-text)] whitespace-nowrap">npx activeloom init --harness claude --harness codex --harness gemini</span>
+          <span id="hero-cmd-text" class="text-[var(--loom-text)] whitespace-nowrap">npx activeloom add critique --harness claude</span>
         </div>
         <button
           type="button"
@@ -48,6 +48,10 @@
       </div>
     </div>
 
+    <p class="-mt-5 mb-8 text-xs font-mono text-[var(--loom-muted)]">
+      Installs one skill for you (Tier 0). Nothing is written to a repository. <a href="#tiers" class="underline underline-offset-4 hover:text-[var(--loom-text)]">More ways to adopt ↓</a>
+    </p>
+
     <!-- Metadata Badges -->
     <div class="flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs font-mono text-[var(--loom-muted)]">
       <span class="flex items-center gap-1.5">
@@ -57,10 +61,10 @@
         <span class="text-[var(--loom-accent)]">✔</span> OpenAI Codex
       </span>
       <span class="flex items-center gap-1.5">
-        <span class="text-[var(--loom-accent)]">✔</span> Google Antigravity / Gemini
+        <span class="text-[var(--loom-accent)]">✔</span> Gemini / Antigravity (Agy)
       </span>
       <span class="flex items-center gap-1.5">
-        <span class="text-[var(--loom-accent)]">✔</span> Node 18.17+ & Python 3.9+
+        <span class="text-[var(--loom-accent)]">✔</span> CLI: Node 18.17+
       </span>
       <span class="flex items-center gap-1.5">
         <span class="text-[var(--loom-accent)]">✔</span> Apache 2.0

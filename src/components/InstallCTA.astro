@@ -11,39 +11,45 @@
       Give your agents real discipline today.
     </h2>
     <p class="text-base sm:text-lg text-[var(--loom-muted)] max-w-2xl mx-auto mb-10">
-      One command to initialize your repository. Your workflow stays yours. Your agents' reviews now leave evidence pinned to the commit they read.
+      Start with one skill, then set up a repository when you're ready. Your workflow stays yours. Your agents' reviews now leave evidence pinned to the commit they read.
     </p>
 
     <!-- Terminal Command Box with Selector -->
     <div class="max-w-2xl mx-auto rounded-xl border border-[var(--loom-border-active)] bg-[var(--loom-code)] overflow-hidden shadow-2xl text-left font-mono text-xs sm:text-sm">
-      <div class="flex items-center border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/80 px-2 overflow-x-auto">
-        <button
-          type="button"
-          data-install-mode="init"
-          class="install-tab-btn px-4 py-2.5 border-b-2 border-[var(--loom-accent)] text-[var(--loom-text)] font-semibold whitespace-nowrap"
-        >
-          1. Initialize Repo
-        </button>
+      <div role="tablist" aria-label="Install options" class="flex items-center border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/80 px-2 overflow-x-auto">
         <button
           type="button"
           data-install-mode="add"
+          role="tab"
+          aria-selected="true"
+          class="install-tab-btn px-4 py-2.5 border-b-2 border-[var(--loom-accent)] text-[var(--loom-text)] font-semibold whitespace-nowrap"
+        >
+          1. Try one skill
+        </button>
+        <button
+          type="button"
+          data-install-mode="init"
+          role="tab"
+          aria-selected="false"
           class="install-tab-btn px-4 py-2.5 border-b-2 border-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] whitespace-nowrap"
         >
-          2. Try Single Skill
+          2. Set up a repo
         </button>
         <button
           type="button"
           data-install-mode="source"
+          role="tab"
+          aria-selected="false"
           class="install-tab-btn px-4 py-2.5 border-b-2 border-transparent text-[var(--loom-muted)] hover:text-[var(--loom-text)] whitespace-nowrap"
         >
-          3. Source Checkout
+          3. Contribute
         </button>
       </div>
 
       <div class="p-5 flex items-center justify-between gap-4">
         <div class="flex items-center gap-2 overflow-x-auto">
           <span class="text-[var(--loom-accent)] font-bold select-none">$</span>
-          <span id="install-cmd-display" class="text-[var(--loom-text)] whitespace-nowrap">npx activeloom init --harness claude --harness codex --harness gemini</span>
+          <span id="install-cmd-display" aria-live="polite" class="text-[var(--loom-text)] whitespace-nowrap">npx activeloom add critique --harness claude</span>
         </div>
         <button
           type="button"
@@ -58,8 +64,12 @@
       </div>
     </div>
 
-    <div class="mt-6 text-xs font-mono text-[var(--loom-muted)]">
-      Requires Node 18.17+ and Python 3.9+ · Zero runtime telemetry sent to third parties
+    <p id="install-cmd-note" class="mt-4 text-xs font-mono text-[var(--loom-muted)]">Installs one skill into your personal skills directory. Nothing is written to a repository.</p>
+
+    <div class="mt-6 text-xs font-mono text-[var(--loom-muted)] space-y-1.5">
+      <div>CLI: Node 18.17+ · <code>init</code>: Python 3.9+ with PyYAML · Add <code>--dry-run</code> to preview any install</div>
+      <div>Running skills: your agent CLI(s) and an authenticated <code>gh</code>; <code>agent-loop</code> needs both the Claude and Codex CLIs</div>
+      <div><a href="https://github.com/loomantix/activeloom/blob/main/docs/getting-started.md" target="_blank" rel="noreferrer" class="text-[var(--loom-text)] underline underline-offset-4">Full walkthrough: Getting started ↗</a></div>
     </div>
   </div>
 </section>
@@ -67,10 +77,16 @@
 <script is:inline>
   (function () {
     const COMMANDS = {
+      add: 'npx activeloom add critique --harness claude',
       init: 'npx activeloom init --harness claude --harness codex --harness gemini',
-      add: 'npx activeloom add diagnosing-bugs --harness codex',
       source: 'git clone https://github.com/loomantix/activeloom.git && cd activeloom',
     };
+    const NOTES = {
+      add: 'Installs one skill into your personal skills directory. Nothing is written to a repository.',
+      init: 'Run inside the repository you want to set up. Writes the selected harness trees; review the diff, then run the onboard skill.',
+      source: 'For contributing to ActiveLoom itself. See CONTRIBUTING.md in the repository.',
+    };
+    const note = document.getElementById('install-cmd-note');
 
     const tabs = document.querySelectorAll('[data-install-mode]');
     const display = document.getElementById('install-cmd-display');
@@ -81,8 +97,10 @@
       tab.addEventListener('click', () => {
         const mode = tab.getAttribute('data-install-mode');
         display.textContent = COMMANDS[mode];
+        if (note) note.textContent = NOTES[mode];
 
         tabs.forEach((t) => {
+          t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
           if (t === tab) {
             t.classList.add('border-[var(--loom-accent)]', 'text-[var(--loom-text)]', 'font-semibold');
             t.classList.remove('border-transparent', 'text-[var(--loom-muted)]');

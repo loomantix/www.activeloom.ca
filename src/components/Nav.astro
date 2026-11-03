@@ -11,9 +11,10 @@
 
     <!-- Nav Links -->
     <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[var(--loom-muted)]">
-      <a href="#showcase" class="hover:text-[var(--loom-text)] transition-colors">Showcase</a>
       <a href="#capabilities" class="hover:text-[var(--loom-text)] transition-colors">Capabilities</a>
       <a href="#herd" class="hover:text-[var(--loom-text)] transition-colors">Herd</a>
+      <a href="#showcase" class="hover:text-[var(--loom-text)] transition-colors">Showcase</a>
+      <a href="https://github.com/loomantix/activeloom/blob/main/docs/getting-started.md" target="_blank" rel="noreferrer" class="hover:text-[var(--loom-text)] transition-colors">Docs</a>
       <a href="#boundaries" class="hover:text-[var(--loom-text)] transition-colors">Boundaries</a>
       <a href="#tiers" class="hover:text-[var(--loom-text)] transition-colors">Adoption Tiers</a>
       <a href="https://github.com/loomantix/activeloom" target="_blank" rel="noreferrer" class="hover:text-[var(--loom-text)] transition-colors flex items-center gap-1.5">
@@ -25,13 +26,13 @@
     </nav>
 
     <!-- Controls & CTA -->
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 sm:gap-3">
       <!-- Ground Mode Toggle (ink / paper) -->
       <div class="flex items-center p-1 rounded-md border border-[var(--loom-border)] bg-[var(--loom-panel)] text-xs font-mono">
         <button
           type="button"
           data-ground-btn="ink"
-          class="px-2.5 py-1 rounded transition-colors text-[var(--loom-text)] font-semibold"
+          class="px-2 sm:px-2.5 py-1 rounded transition-colors text-[var(--loom-text)] font-semibold"
           aria-label="Terminal dark mode"
         >
           ink
@@ -39,19 +40,22 @@
         <button
           type="button"
           data-ground-btn="paper"
-          class="px-2.5 py-1 rounded transition-colors text-[var(--loom-muted)] hover:text-[var(--loom-text)]"
+          class="px-2 sm:px-2.5 py-1 rounded transition-colors text-[var(--loom-muted)] hover:text-[var(--loom-text)]"
           aria-label="Editorial light mode"
         >
           paper
         </button>
       </div>
 
+      <!-- GitHub link for small screens, where the nav links are hidden -->
+      <a href="https://github.com/loomantix/activeloom" target="_blank" rel="noreferrer" class="md:hidden text-xs font-mono text-[var(--loom-muted)] hover:text-[var(--loom-text)]">GitHub</a>
+
       <!-- Quick Install Button -->
       <a
         href="#install"
-        class="hidden sm:inline-flex items-center justify-center px-4 py-1.5 text-xs font-mono font-semibold rounded-md border border-[var(--loom-border-active)] bg-[var(--loom-panel)] hover:border-[var(--loom-accent)] hover:text-[var(--loom-accent)] transition-all shadow-sm"
+        class="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 text-xs font-mono font-semibold rounded-md border border-[var(--loom-border-active)] bg-[var(--loom-panel)] hover:border-[var(--loom-accent)] hover:text-[var(--loom-accent)] transition-all shadow-sm"
       >
-        Install CLI
+        Install
       </a>
     </div>
   </div>
