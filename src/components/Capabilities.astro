@@ -13,6 +13,17 @@
       </p>
     </div>
 
+    <!-- How the parts fit together -->
+    <div class="mb-12 p-5 sm:p-6 rounded-xl border border-[var(--loom-border-active)] bg-[var(--loom-code)]">
+      <div class="text-xs font-mono uppercase tracking-wider text-[var(--loom-text)] font-semibold mb-4">How it fits together</div>
+      <ol class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-[var(--loom-muted)]">
+        <li><span class="font-mono text-[var(--loom-accent)] font-bold">1 · Skills</span><br />The base. Install any one on its own: interviews, debugging, issue work, review.</li>
+        <li><span class="font-mono text-[var(--loom-amber)] font-bold">2 · Review protocol</span><br />Review skills post findings on a draft PR before fixing, and record them in a ledger pinned to the commit.</li>
+        <li><span class="font-mono text-[var(--loom-cyan)] font-bold">3 · Automation</span><br /><code class="text-[var(--loom-text)]">agent-loop</code> works an allowlisted issue queue headlessly. The optional <a href="#herd" class="underline underline-offset-4 hover:text-[var(--loom-text)]">herd skills</a> run the same reviews, interviews, and builds in terminal panes you watch.</li>
+        <li><span class="font-mono text-[var(--loom-coral)] font-bold">4 · Sync</span><br />Keeps all of it current across your repositories through pull requests, without touching your local rules.</li>
+      </ol>
+    </div>
+
     <!-- Capabilities Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- 01 Reusable Engineering Skills -->
@@ -24,7 +35,7 @@
           </div>
           <h3 class="text-xl font-bold font-display mb-2">Not chat prompts. Operational skills.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            ActiveLoom skills encode strict operational procedures with validation checklists and deterministic outputs. From pre-code requirements grilling (<code class="text-[var(--loom-text)]">grill</code>) and deep troubleshooting (<code class="text-[var(--loom-text)]">diagnosing-bugs</code>) to task packets.
+            ActiveLoom skills encode strict operational procedures with validation checklists and deterministic outputs. From product and design interviews (<code class="text-[var(--loom-text)]">product-grill</code>, <code class="text-[var(--loom-text)]">grill</code>) and deep troubleshooting (<code class="text-[var(--loom-text)]">diagnosing-bugs</code>) to agent-ready backlogs (<code class="text-[var(--loom-text)]">backlog-refinement</code>) and pre-merge red teams (<code class="text-[var(--loom-text)]">red-team</code>).
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono text-[var(--loom-muted)] space-y-1.5">
@@ -72,13 +83,13 @@
           </div>
           <h3 class="text-xl font-bold font-display mb-2">Adversarial review. Proof before edit.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            No rubber-stamping. Reviewers must inspect draft PR diffs and post verified findings inline to GitHub <em>before</em> touching any code. Automated tier gating resolves <strong>Lean</strong> (fast critical check) or <strong>Deep</strong> (exhaustive matrix).
+            No rubber-stamping. Reviewers inspect the draft PR diff and post verified findings inline on GitHub <em>before</em> touching any code. Each PR's review depth is resolved first: <strong>Lean</strong> runs the highest-signal lenses; <strong>Deep</strong> runs the full matrix for risky surfaces such as auth or crypto.
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono space-y-1.5">
           <div class="flex items-center justify-between text-[11px]">
-            <span class="text-[var(--loom-muted)]">Review Tier Gate:</span>
-            <span class="text-[var(--loom-amber)] font-bold">Deep Tier</span>
+            <span class="text-[var(--loom-muted)]">Review depth:</span>
+            <span class="text-[var(--loom-amber)] font-bold">Deep</span>
           </div>
           <div class="text-[10px] text-[var(--loom-muted)]">Trigger: auth &amp; crypto boundaries</div>
           <div class="text-[10px] text-[var(--loom-accent)] font-semibold">✓ Findings posted inline before code fix</div>
@@ -116,7 +127,7 @@
           </div>
           <h3 class="text-xl font-bold font-display mb-2">Autonomous queues with guardrails.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            Let agents work your GitHub backlog safely with <code class="text-[var(--loom-text)]">agent-loop</code>. Strict issue allowlists, one isolated Git worktree per issue (<code class="text-[var(--loom-cyan)]">/tmp/agent-loop-worktrees</code> by default), test-driven iteration, and automatic bail-outs when blocked.
+            Let agents work your GitHub backlog safely with <code class="text-[var(--loom-text)]">agent-loop</code>. Strict issue allowlists, one linked Git worktree and draft PR per issue (<code class="text-[var(--loom-cyan)]">agent-loop/issue-&lt;N&gt;-&lt;run&gt;</code>), bounded local review rounds, fresh-base validation, and automatic bail-outs when blocked. <a href="https://github.com/loomantix/activeloom/blob/main/docs/autonomous-development.md" target="_blank" rel="noreferrer" class="text-[var(--loom-text)] underline underline-offset-4">Setup guide ↗</a>
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono space-y-1.5">
@@ -139,7 +150,7 @@
           </div>
           <h3 class="text-xl font-bold font-display mb-2">Sync every repo without losing local rules.</h3>
           <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-6">
-            ActiveLoom's sync engine propagates skills and review updates via PRs (<code class="text-[var(--loom-text)]">sync-v2</code>) while strictly protecting consumer-owned security rules in <code class="text-[var(--loom-coral)]">.review/addendum.local.md</code>.
+            A scheduled GitHub Actions workflow proposes skill and review updates as pull requests from the upstream's <code class="text-[var(--loom-text)]">sync-v2</code> release ref, while protecting repo-owned rules such as <code class="text-[var(--loom-coral)]">.review/addendum.local.md</code>. <a href="https://github.com/loomantix/activeloom/blob/main/docs/sync.md" target="_blank" rel="noreferrer" class="text-[var(--loom-text)] underline underline-offset-4">How sync works ↗</a>
           </p>
         </div>
         <div class="p-3 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] text-xs font-mono space-y-1.5">
@@ -164,7 +175,7 @@
       'npx activeloom detect',
       'npx activeloom add critique --harness claude',
       'pnpm test -- tests/allocator.spec.ts',
-      'git worktree add /tmp/agent-loop-worktrees/issue-88',
+      'npx activeloom add hreview horch --harness claude',
       'git push -u origin fix/allocator-floor',
     ];
 

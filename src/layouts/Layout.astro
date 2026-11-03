@@ -12,7 +12,7 @@ interface Props {
 
 const {
   title = 'ActiveLoom: Reusable Engineering Workflows for Coding Agents',
-  description = 'Skills, adversarial PR review protocols, verifiable commit ledgers, and bounded issue loops for Claude Code, Codex, and Gemini. One upstream, many repos.',
+  description = 'Skills, adversarial PR review protocols, commit-pinned review ledgers, bounded issue autonomy, and herd orchestration for Claude Code, Codex, and Gemini. One upstream, many repos.',
   noindex = false,
 } = Astro.props;
 
@@ -45,7 +45,15 @@ const structuredData = {
       codeRepository: 'https://github.com/loomantix/activeloom',
       license: 'https://www.apache.org/licenses/LICENSE-2.0',
       author: { '@id': 'https://www.loomantix.com/#organization' },
-      sameAs: ['https://github.com/loomantix/activeloom'],
+      sameAs: ['https://github.com/loomantix/activeloom', 'https://www.npmjs.com/package/activeloom'],
+      programmingLanguage: ['JavaScript', 'Python', 'Markdown'],
+      runtimePlatform: 'Node.js 18.17+',
+      softwareRequirements: 'Node.js 18.17+; Python 3.9+ with PyYAML for activeloom init',
+      keywords: ['Claude Code', 'OpenAI Codex', 'Gemini', 'Antigravity', 'agent skills', 'code review', 'herdr', 'herd orchestration'],
+      subjectOf: [
+        { '@type': 'TechArticle', name: 'ActiveLoom agent entry guide', url: `${SITE}/agent-guide.md`, encodingFormat: 'text/markdown' },
+        { '@type': 'TechArticle', name: 'ActiveLoom llms.txt', url: `${SITE}/llms.txt`, encodingFormat: 'text/plain' },
+      ],
     },
   ],
 };
@@ -61,6 +69,7 @@ const structuredData = {
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonicalURL} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="text/plain" title="LLM documentation index" href="/llms.txt" />
+    <link rel="alternate" type="text/markdown" title="Agent entry guide" href="/agent-guide.md" />
     <meta name="theme-color" content="#0d0f14" />
 
     <!-- Open Graph / Twitter -->

@@ -12,7 +12,7 @@ https://github.com/loomantix/activeloom/blob/main/docs/agent-guide.md.
 Assess how ActiveLoom can help with the task in this repository.
 
 Read the repository's own agent instructions first. Inspect existing harness
-roots, ActiveLoom or legacy sync configuration, and relevant installed skills.
+roots, ActiveLoom sync configuration, and relevant installed skills.
 Identify the smallest useful workflow, its prerequisites, and missing setup.
 Distinguish what is installed from what current upstream documentation describes.
 Report the recommended entry point and why it fits. Do not install files,
@@ -22,10 +22,12 @@ Proceed with implementation or review only within the task's existing scope.
 
 When the session already has an implementation or review task, append its concrete scope and completion criteria. The prompt above alone requests an assessment, not installation or a review run.
 
+When the user asks to be set up for development — "help me set up ActiveLoom", "get agents working our backlog" — follow [Set up for autonomous development](https://github.com/loomantix/activeloom/blob/main/docs/autonomous-development.md) instead. It briefs the user, finds the first incomplete stage, and carries the repository through `backlog-refinement` to a first allowlisted `agent-loop` run, asking before each change to GitHub state.
+
 ## Establish the local facts
 
 1. Read the consumer repository's `AGENTS.md`, `CLAUDE.md`, or equivalent. Preserve its provider choices, worktree rules, validation requirements, and action boundaries.
-2. Inspect `.activeloom-config.yml`, or the legacy `.platform-config.yml`, `.codex-platform-config.yml`, and `.gemini-platform-config.yml`. Identify selected harnesses and existing sync workflows before proposing another installation.
+2. Inspect `.activeloom-config.yml`. Identify selected harnesses and existing sync workflows before proposing another installation.
 3. Locate the relevant installed `SKILL.md` and its supporting references. The distribution roots are `.claude/`, `.codex/`, and `.agents/`; personal installations can also supply skills. Do not assume the skill loaded by the session is the repository copy.
 4. Establish the installed revision where available: configured upstream ref, latest merged sync commit, and ledger version/integrity files for review work. A movable tag name alone does not prove which bytes are installed.
 5. Read only the selected skill and the references it requires. Check tools, authentication, and prerequisites before attempting its workflow. An installed prompt is not evidence that a reviewer launcher is usable.
@@ -34,24 +36,41 @@ If ActiveLoom is absent, use [Getting started](https://github.com/loomantix/acti
 
 ## Select by task
 
-Names below identify skills; use the invocation supported by the current harness. Availability must be checked in that harness's directory or the CLI's `add --harness <id>` listing.
+Names below identify skills; use the invocation supported by the current harness. Availability must be checked in that harness's directory or the CLI's `npx activeloom add --harness <id>` listing. [Everyday workflows](https://github.com/loomantix/activeloom/blob/main/docs/workflows.md) shows how the most common ones — `issues`, `diagnosing-bugs`, `backlog-refinement`, `grill`, `product-grill`, `agent-loop`, `critique`, `deepcritique`, and the automatic review chain — are started and how they hand off to each other.
 
-| Need                                         | Entry point                                | Boundary                                                                                                |
-| -------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| Clarify a design before code                 | `grill`                                    | An interview and design exercise; does not implement the feature                                        |
-| Validate a product problem or user value     | `product-grill`                            | Product discovery regardless of job title; can conclude don't build or gather evidence first            |
-| Investigate a reproducible bug               | `diagnosing-bugs`                          | Establish the symptom and a tight reproduction before changing code                                     |
-| Reduce comment bloat without changing code   | `simplify-comments`                        | Comments and docstrings only; the code fingerprint and repository gates must pass before the PR         |
-| Build a feature with architectural discovery | `feature-dev`                              | Requires a concrete user objective and repository context                                               |
-| Fill project-specific onboarding fields      | `onboard`                                  | Draft evidence-based values for confirmation; do not invent domain rules                                |
-| Manage issue dependencies and readiness      | `issues`                                   | Uses GitHub issue state; follow the command's read/write scope                                          |
-| Prepare issues for autonomous work           | `backlog-refinement`                       | Curates the queue; does not authorize implementing every open issue                                     |
-| Implement a bounded issue queue              | `agent-loop`                               | Requires an explicit issue allowlist, harness-specific worker/review setup, and its own launch contract |
-| Execute a supplied implementation packet     | `task-packet`                              | Follow the packet's acceptance criteria and action boundaries                                           |
-| Choose reviewer models, effort, and order    | `review-setup`                             | Confirm settings with the user; the helper is the profile's only writer                                 |
-| Clean up or review an existing PR            | `refactorpass`, `critique`, `deepcritique` | Read the review workflow and ledger first; resolve the tier before running                              |
-| Automate a local review relay                | `review-chain-runner.py`                   | Requires an authorized plan, clean dedicated worktree, draft PR, reviewers, and validation commands     |
-| Handle hosted review comments                | `copilot-review` or `reviewit`             | Only when the task and repository policy permit that hosted workflow                                    |
+| Need                                          | Entry point                                | Boundary                                                                                                                            |
+| --------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Clarify a design before code                  | `grill`                                    | An interview and design exercise; does not implement the feature                                                                    |
+| Validate a product problem or user value      | `product-grill`                            | Product discovery regardless of job title; can conclude don't build or gather evidence first                                        |
+| Investigate a reproducible bug                | `diagnosing-bugs`                          | Establish the symptom and a tight reproduction before changing code                                                                 |
+| Write or resume an issue-comment handoff      | `handoff`                                  | The marked comment is the instruction of record; every fact it states is checked at write time                                      |
+| Reduce comment bloat without changing code    | `simplify-comments`                        | Comments and docstrings only; the code fingerprint and repository gates must pass before the PR                                     |
+| Build a feature with architectural discovery  | `feature-dev`                              | Requires a concrete user objective and repository context                                                                           |
+| Fill project-specific onboarding fields       | `onboard`                                  | Draft evidence-based values for confirmation; do not invent domain rules                                                            |
+| Manage issue dependencies and readiness       | `issues`                                   | Uses GitHub issue state; follow the command's read/write scope                                                                      |
+| Implement one issue to a draft PR             | `issues start <n>`                         | Stops on a failed scope check, blocker, or existing PR; ends at a draft PR, with review in a fresh session                          |
+| Set up a repository for autonomous work       | [Setup guide](https://github.com/loomantix/activeloom/blob/main/docs/autonomous-development.md)   | Stage by stage with user confirmation; ends at a first allowlisted loop run, not at merge                                           |
+| Prepare issues for autonomous work            | `backlog-refinement`                       | Curates the queue; does not authorize implementing every open issue                                                                 |
+| Implement a bounded issue queue               | `agent-loop`                               | Requires an explicit issue allowlist, harness-specific worker/review setup, and its own launch contract                             |
+| Choose reviewer models, effort, and order     | `review-setup`                             | Confirm settings with the user; the helper is the profile's only writer                                                             |
+| Clean up or review an existing PR             | `refactorpass`, `critique`, `deepcritique` | Read the review workflow and ledger first; resolve the tier before running                                                          |
+| Automate a local review relay                 | `review-chain-runner.py`                   | Requires an authorized plan, clean dedicated worktree, draft PR, reviewers, and a repository validation contract or legacy commands |
+| Find how a reviewed PR fails before merge     | `red-team`                                 | Run after the review chain; writes no ledger records; fixes and follow-up issues only on user confirmation                          |
+| Handle hosted review comments                 | `copilot-review` or `reviewit`             | Only when the task and repository policy permit that hosted workflow                                                                |
+| Run a review chain in visible herdr panes     | `hreview`                                  | Requires herdr and the Codex control surface; same ledger and tier rules as an ordinary chain; never merges                         |
+| Stand a model in for a human glance           | `auto-glance`                              | Only when the repository sets `glance.auto`; never merges or pushes to the PR                                                       |
+| Grill issues across several engines           | `hgrill`                                   | Touches only the chained issues and their children; ends at an assumptions block for a human check                                  |
+| Orchestrate a herdr workspace                 | `horch`                                    | Needs a per-push instruction file; ships only to the integration branch, through `ship-staging`                                     |
+| Run a batch of agent issues on herdr          | `hloop`                                    | Runs under `horch`'s rules; skips issues with an open design; ships only through `horch`'s gate                                     |
+| Promote integration to production             | `promote`                                  | Runs the repository's `.activeloom-promote.json` recipe; stops at the human approval and merge                                      |
+| Red-team a reviewed PR on herdr               | `hred-team`                                | Fixes blocker and high findings on the PR and files the rest as issues; never restarts the review chain or merges                   |
+| Promote integration to production on herdr    | `hpromote`                                 | Needs a `promotion` section; stops at the human approval and merge                                                                  |
+| Build a checklist for testing changes by hand | `manual-tests` (Claude Code)               | Publishes a private Artifact from a portable plan file; results are report-only; never runs automated suites                        |
+
+The herd skills (`hreview`, `auto-glance`, `hgrill`, `horch`, `hloop`, `hpromote`, `hred-team`) share their mechanics in each root's `references/herdr.md` and read `.activeloom-herd.json` from the integration branch; see [Herd orchestration](https://github.com/loomantix/activeloom/blob/main/docs/herd-orchestration.md).
+
+For repository-owned internal documentation, use `internal-docs` and the
+consumer command/setup contract described in [Internal docs](https://github.com/loomantix/activeloom/blob/main/docs/internal-docs.md).
 
 Specialized skills also exist, such as Actions usage auditing, mobile installation, accessibility review, and package publication. Their presence varies by harness; inspect their requirements rather than treating the toolkit as a uniform menu.
 
@@ -65,7 +84,7 @@ The protocol uses a draft PR as shared review context. Reviewers record verified
 
 Lean and Deep describe review scope and budgets. Resolve them from the installed workflow's triggers; the size of a diff or the presence of a `deepcritique` skill is not sufficient to choose a tier. The workflow defines how explicit deep-review requests are handled.
 
-For automatic chains, follow the [runner reference](https://github.com/loomantix/activeloom/blob/main/.codex/references/review-chain-runner.md). The runner lives in the Codex control surface and can coordinate the supported engines. Selecting only Claude or Gemini at installation does not install that controller. A skill copied with `add` is also not proof that all peer reviewers and their supporting skills are installed.
+For automatic chains, follow the [runner reference](https://github.com/loomantix/activeloom/blob/main/.codex/references/review-chain-runner.md); [Everyday workflows](https://github.com/loomantix/activeloom/blob/main/docs/workflows.md#the-automatic-review-chain) summarizes setup and outcomes for the user. The runner lives in the Codex control surface and can coordinate the supported engines. Selecting only Claude or Gemini at installation does not install the runner. It is not the run controller that numbers each pass — that ships with every harness root, so a single-harness repository can still run `critique` and `deepcritique`. A skill copied with `add` is also not proof that all peer reviewers and their supporting skills are installed.
 
 Use checked-in launchers and the required validation commands. Launcher failure, missing evidence, and exhausted budgets must be reported as such. A fixed plan can complete without independent convergence. Success does not authorize merge, deployment, or a new run with a reset budget.
 
@@ -84,16 +103,16 @@ Scheduled sync requires its workflow on the default branch and the appropriate r
 
 ## Know which source to edit
 
-| Source                                    | Purpose                                                      | Editing rule                                                                                   |
-| ----------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| `prompts/skills/` and `prompts/profiles/` | Shared skill sources and harness vocabulary                  | Edit here for rendered skills, then run the renderer                                           |
-| `prompts/rendered-files.txt`              | Generated ownership inventory                                | Inspect to identify generated files; do not maintain by hand                                   |
-| `.claude/`, `.codex/`, `.agents/`         | Distributed prompts, references, and helpers                 | Some files are generated or vendored; establish ownership first                                |
-| `scripts/sync-targets.yml`                | Consumer destination and ownership contract                  | Controls shared and selected-harness targets                                                   |
-| `cli/`                                    | Installer and detection code                                 | Separate from the content it downloads                                                         |
-| `imports/`                                | Imported engine trees                                        | New consumers use the root manifest and harness trees, not separate installs from these copies |
-| Consumer `.activeloom-config.yml`         | Harness selection, substitutions, path permissions, opt-outs | Owned by that consumer                                                                         |
-| Consumer `.review/addendum.local.md`      | Repository-specific review lessons                           | Keep local context here; sync preserves it                                                     |
+| Source                                           | Purpose                                                      | Editing rule                                                     |
+| ------------------------------------------------ | ------------------------------------------------------------ | ---------------------------------------------------------------- |
+| `prompts/skills/` and `prompts/profiles/`        | Shared skill sources and harness vocabulary                  | Edit here for rendered skills, then run the renderer             |
+| `prompts/partials/review/` and `prompts/review/` | Shared review policy and separate engine templates           | Edit the policy or engine template, then regenerate the Markdown |
+| `prompts/rendered-files.txt`                     | Generated ownership inventory                                | Inspect to identify generated files; do not maintain by hand     |
+| `.claude/`, `.codex/`, `.agents/`                | Distributed prompts, references, and helpers                 | Some files are generated or vendored; establish ownership first  |
+| `scripts/sync-targets.yml`                       | Consumer destination and ownership contract                  | Controls shared and selected-harness targets                     |
+| `cli/`                                           | Installer and detection code                                 | Separate from the content it downloads                           |
+| Consumer `.activeloom-config.yml`                | Harness selection, substitutions, path permissions, opt-outs | Owned by that consumer                                           |
+| Consumer `.review/addendum.local.md`             | Repository-specific review lessons                           | Keep local context here; sync preserves it                       |
 
 Review prompts intentionally retain engine-specific implementations. Do not consolidate them merely because their names match. Read [prompt rendering](https://github.com/loomantix/activeloom/blob/main/docs/prompt-rendering.md), [decision records](https://github.com/loomantix/activeloom/blob/main/docs/decisions/README.md), and [Contributing](https://github.com/loomantix/activeloom/blob/main/CONTRIBUTING.md) before changing the shared source.
 

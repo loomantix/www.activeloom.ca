@@ -1,0 +1,119 @@
+---
+// Mirrors the skill table in loomantix/activeloom docs/herd-orchestration.md.
+const SKILLS = [
+  {
+    name: 'horch',
+    tag: 'ORCHESTRATOR',
+    color: 'var(--loom-accent)',
+    does: 'Orchestrates a whole herdr workspace: starts review chains, builds, grills and promotions in tabs, and merges finished work into your integration branch (for example staging, never production).',
+    stops: 'A merge check fails, a chain blocks, or a call is yours.',
+  },
+  {
+    name: 'hreview',
+    tag: 'REVIEW CHAIN',
+    color: 'var(--loom-amber)',
+    does: 'Drives the same critique passes you would run by hand, one engine per pane, until the reviewers converge or the rounds run out.',
+    stops: 'It converged (the merge is yours), or it is blocked.',
+  },
+  {
+    name: 'hgrill',
+    tag: 'INTERVIEWS',
+    color: 'var(--loom-cyan)',
+    does: 'Interviews (“grills”) an issue on each configured engine in turn, then posts the biggest product calls and assumptions to the issue.',
+    stops: 'Always: the assumptions block waits for your sign-off.',
+  },
+  {
+    name: 'hloop',
+    tag: 'BATCH BUILDS',
+    color: 'var(--loom-cyan)',
+    does: 'The visible counterpart to agent-loop: a build tab per agent-ready issue, then a fresh review chain, then a merge through horch’s checks.',
+    stops: 'An issue’s design is open, a check fails, or a chain blocks.',
+  },
+  {
+    name: 'hred-team',
+    tag: 'RED TEAM',
+    color: 'var(--loom-coral)',
+    does: 'Red-teams a reviewed PR in a read-only pane. The author engine fixes blocker and high findings; the rest become issues.',
+    stops: 'It pushed fixes (the chain needs a restart), or a high finding stayed unfixed.',
+  },
+  {
+    name: 'hpromote',
+    tag: 'PROMOTION',
+    color: 'var(--loom-amber)',
+    does: 'Promotes the integration branch to production by running your repository’s recipe across visible panes, with a read-only risk review and fix lanes.',
+    stops: 'The promotion PR is ready: approving and merging it is yours.',
+  },
+  {
+    name: 'auto-glance',
+    tag: 'OPT-IN GLANCE',
+    color: 'var(--loom-muted)',
+    does: 'Small or docs-only PRs normally wait for a quick human look (a “glance”). This lets one model that didn’t write the PR do that read and mark it ready. Opt-in per repository; never merges.',
+    stops: 'The read found something, or CI is red.',
+  },
+];
+---
+
+<section id="herd" class="py-16 sm:py-24 border-b border-[var(--loom-border)] bg-[var(--loom-panel)]/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
+      <div class="lg:col-span-7">
+        <div class="text-xs font-mono uppercase tracking-widest text-[var(--loom-accent)] mb-2">Herd Orchestration</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-display tracking-tight">
+          One session drives the herd. You watch every pane.
+        </h2>
+        <p class="text-base sm:text-lg text-[var(--loom-muted)] mt-4">
+          The herd skills let one agent session drive other agent sessions in visible
+          <a href="https://herdr.dev" target="_blank" rel="noreferrer" class="text-[var(--loom-text)] underline decoration-[var(--loom-border-active)] underline-offset-4 hover:decoration-[var(--loom-accent)]">herdr</a>
+          panes (herdr is a terminal workspace manager for coding agents). Every review pass, interview, and build runs where you can see it, and you can type into any pane to step in.
+          Any of the three harnesses can drive, and any of them can be driven.
+        </p>
+      </div>
+      <div class="lg:col-span-5 flex flex-col justify-end gap-3 text-sm text-[var(--loom-muted)]">
+        <div class="p-4 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] font-mono text-xs space-y-1.5">
+          <div class="text-[var(--loom-text)] font-semibold">Optional, and not a second evidence system</div>
+          <div>Everything here also works without herdr. Each pass is the engine’s ordinary review, recorded in the PR ledger exactly as if you ran it yourself. Review depth (Lean/Deep), round caps, convergence, and attestations are unchanged.</div>
+        </div>
+        <div class="p-4 rounded-lg border border-[var(--loom-border)] bg-[var(--loom-code)] font-mono text-xs space-y-1.5">
+          <div class="text-[var(--loom-text)] font-semibold">It stops for the calls that are yours</div>
+          <div>Merging to production, product calls, and anything it cannot do safely.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {SKILLS.map((s) => (
+        <div class="p-5 rounded-xl border border-[var(--loom-border)] bg-[var(--loom-panel)] flex flex-col justify-between hover:border-[var(--loom-border-active)] transition-all">
+          <div>
+            <div class="flex items-center justify-between text-[10px] font-mono text-[var(--loom-muted)] mb-3">
+              <code class="text-sm font-bold" style={`color: ${s.color}`}>{s.name}</code>
+              <span class="uppercase tracking-wider">{s.tag}</span>
+            </div>
+            <p class="text-sm text-[var(--loom-muted)] leading-relaxed mb-4">{s.does}</p>
+          </div>
+          <div class="pt-3 border-t border-[var(--loom-border)] text-xs font-mono text-[var(--loom-muted)]">
+            <span class="text-[var(--loom-text)] font-semibold">Stops for you:</span> {s.stops}
+          </div>
+        </div>
+      ))}
+
+      <div class="p-5 rounded-xl border border-[var(--loom-border-active)] bg-[var(--loom-code)] flex flex-col justify-between font-mono text-xs">
+        <div class="space-y-2 text-[var(--loom-muted)]">
+          <div class="text-[var(--loom-text)] font-semibold text-sm">Get started</div>
+          <ul class="list-disc pl-4 space-y-1">
+            <li>Run the driving session inside herdr 0.9.0+</li>
+            <li>ActiveLoom in the repo, including the Codex harness</li>
+            <li>A review profile (<code class="text-[var(--loom-text)]">review-setup</code>)</li>
+            <li>An authenticated <code class="text-[var(--loom-text)]">gh</code>, plus <code class="text-[var(--loom-text)]">jq</code> and Python 3</li>
+            <li><code class="text-[var(--loom-text)]">horch</code> merges only with <code class="text-[var(--loom-text)]">ship-staging</code> and a <code class="text-[var(--loom-text)]">ship</code> section in <code class="text-[var(--loom-text)]">.activeloom-herd.json</code></li>
+          </ul>
+        </div>
+        <div class="mt-4 space-y-2">
+          <div class="p-2 rounded bg-[var(--loom-panel)] border border-[var(--loom-border)] text-[var(--loom-accent)] break-words">$ npx activeloom add hreview horch --harness claude</div>
+          <a href="https://github.com/loomantix/activeloom/blob/main/docs/herd-orchestration.md" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-[var(--loom-text)] hover:text-[var(--loom-accent)] transition-colors">
+            Read the herd guide ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
